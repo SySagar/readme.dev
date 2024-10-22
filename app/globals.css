@@ -18,7 +18,7 @@
 }
 
 body {
-  font-family: "Cal Sans";
+  font-family: "Cal Sans",sans-serif;
 }
 
 @layer base {

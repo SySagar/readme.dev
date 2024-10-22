@@ -59,7 +59,10 @@ const config: Config = {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			}
-  		}
+  		},
+		fontFamily: {
+			Inter: ['Cal Sans']
+		}
   	}
   },
   plugins: [require("tailwindcss-animate")],

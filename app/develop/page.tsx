@@ -7,6 +7,8 @@ import Markdown from "react-markdown";
 import useMarkdownParser from "@app/hooks/useMarkdownParser";
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
+import EmojiPicker from 'emoji-picker-react';
+import {Smile} from 'lucide-react'
 
 export type dataType = {
   firstName: string;
@@ -18,16 +20,24 @@ export type dataType = {
 export default function page() {
   const { register, handleSubmit } = useForm();
   const [data, setData] = useState<dataType>({} as dataType);
+  const [emmojiPicker, setEmmojiPicker] = useState(false)
 
   const markdownPreview = useMarkdownParser(data);
-  console.log(markdownPreview);
+  console.log("tests",markdownPreview);
 
-  const markdown = `# Hi, **Pluto**!`
-  console.log(markdown)
+  const addEmoji = (emoji: any) => {
+    data.description += emoji.native
+  }
+
+  const handleEmoji = () => {
+    setEmmojiPicker(!emmojiPicker)
+  }
+
+  console.log("test", emmojiPicker)
 
   return (
     <div className="flex relative flex-col items-center justify-center h-screen">
-      <Text className="master__title text-7xl absolute top-8 left-16 py-16">
+      <Text variant="heading-1" className="absolute top-8 left-16 py-16">
         Create Your Story
       </Text>
       <div className="main flex flex-row  min-w-full px-20 mt-80 py-8 gap-20">
@@ -51,11 +61,17 @@ export default function page() {
               <Label className="form__label" htmlFor="description">
                 Description:
               </Label>
+              <div className="flex gap-2 relative border-2">
               <textarea
                 {...register("description")}
                 className="description"
                 placeholder="Briefly describe about yourself"
-              />
+                />
+              <Button onClick={handleEmoji} variant={"outline"} size={"icon"}>
+                <Smile/>
+              </Button>
+                </div>
+                <EmojiPicker open={emmojiPicker} className="absolute right-0" />
 
               <Label className="form__label text-nowrap" htmlFor="firstName">
                 Location:
