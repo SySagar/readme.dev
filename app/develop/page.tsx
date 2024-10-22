@@ -26,10 +26,16 @@ export default function page() {
   console.log("tests",markdownPreview);
 
   const addEmoji = (emoji: any) => {
-    data.description += emoji.native
+    setData(
+      (prev)=>({
+        ...prev,
+        description: prev.description + emoji
+      })
+    )
   }
 
-  const handleEmoji = () => {
+  const handleEmoji = (e:any) => {
+    e.preventDefault();
     setEmmojiPicker(!emmojiPicker)
   }
 
@@ -61,7 +67,7 @@ export default function page() {
               <Label className="form__label" htmlFor="description">
                 Description:
               </Label>
-              <div className="flex gap-2 relative border-2">
+              <div className="flex gap-2 relative ">
               <textarea
                 {...register("description")}
                 className="description"
@@ -71,7 +77,13 @@ export default function page() {
                 <Smile/>
               </Button>
                 </div>
-                <EmojiPicker open={emmojiPicker} className="absolute right-0" />
+                <EmojiPicker open={emmojiPicker} style={{
+                  position: 'absolute',
+                  bottom: '50px',
+                  left: '47%'
+                }} onEmojiClick={
+                  (item) => addEmoji(item.emoji)
+                } />
 
               <Label className="form__label text-nowrap" htmlFor="firstName">
                 Location:

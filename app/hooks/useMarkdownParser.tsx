@@ -1,7 +1,5 @@
 import { dataType } from "@app/develop/page";
 import { useState, useEffect, use } from "react";
-import marked from "marked";
-import { LocateIcon } from "lucide-react";
 
 interface FieldStyle {
   color: string;
@@ -15,29 +13,6 @@ interface FieldStyle {
 const useMarkdownParser = (formData: dataType) => {
   console.log(JSON.stringify(formData));
   const [markdownContent, setMarkdownContent] = useState("Your markdown will appear here...");
-
-  // const generateField = (
-  //   value: string,
-  //   prefix: string,
-  //   style: FieldStyle,
-  //   prefixSpacing: number = 1
-  // ) => {
-  //   if (!value) return ""
-  //   const columnSpacer = `<td style="padding-left: ${prefixSpacing * 2}px;"></td>`
-  
-  //   const tableStyle = `border-collapse: collapse; width: 300px; margin-top: ${style.marginTop}; margin-bottom: ${style.marginBottom};`
-  //   const tdStyle = `vertical-align: top; padding: 0;`
-  //   const prefixStyle = `white-space: nowrap; padding-right: 8px;`
-  //   const contentStyle = `color: ${style.color}; font-weight: ${style.fontWeight}; max-width: ${style.maxWidth}; word-wrap: break-word;text-align: left;`
-  
-  //   return `
-  // <table style="${tableStyle}">
-  // <tr>
-  //     <td style="${tdStyle}${prefixStyle}">${prefix}</td>
-  //     <td style="${tdStyle}${contentStyle}">${value}</td>
-  //   </tr>
-  // </table>`
-  // }
 
   const generateField = (
     value: string,
@@ -111,7 +86,7 @@ ${spacer}
     formData.currentlyBuilding,
     "ϟ",
     {
-      color: "#6B7280",
+      color: "#DBEAFE",
       fontWeight: "100",
       marginTop: "4px",
       marginBottom: "0",
@@ -123,13 +98,11 @@ ${spacer}
       setMarkdownContent(content);
     };
 
-    console.log("formData",formData);
     if(Object.keys(formData).length > 0 && Object.values(formData).some((val) => val !== "")){
       generateMarkdown();
     }
     else
     {
-      console.log("sd");
       setMarkdownContent("Your markdown will appear here...");
     }
 
@@ -143,7 +116,6 @@ ${spacer}
   }, [markdownContent]);
 
 
-  console.log("md",markdownContent);
 
   return markdownContent;
 };
