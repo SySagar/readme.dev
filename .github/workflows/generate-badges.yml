@@ -1,0 +1,39 @@
+name: Generate and Commit Badges
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  generate-badges:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'  
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate Badges
+        env:
+          NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
+        run: |
+          npm run build-badge
+
+      - name: Commit and Push Badges
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/badges
+          git commit -m "chore[badges]: Add generated badges"
+          git push
+        if: success()
