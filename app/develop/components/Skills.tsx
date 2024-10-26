@@ -14,6 +14,7 @@ import {
 } from '@groovy-box/ui';
 import useMarkdownParser from '@app/hooks/useMarkdownParser';
 
+// Types
 export type DataType = {
   firstName: string;
   description: string;
@@ -29,6 +30,91 @@ type TypeBasicInfo = {
   handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
 };
 
+type SkillCategory = {
+  title: string;
+  skills: string[];
+};
+
+// Skill categories dataset
+const SKILL_CATEGORIES: SkillCategory[] = [
+  {
+    title: 'Core Languages',
+    skills: ['JavaScript', 'TypeScript', 'Python', 'Java', 'C++', 'Rust', 'Go'],
+  },
+  {
+    title: 'Frontend',
+    skills: [
+      'React',
+      'Vue',
+      'Angular',
+      'Next.js',
+      'Svelte',
+      'HTML',
+      'CSS',
+      'TailwindCSS',
+    ],
+  },
+  {
+    title: 'Backend',
+    skills: [
+      'Node.js',
+      'Express',
+      'NestJS',
+      'Django',
+      'Spring Boot',
+      'GraphQL',
+      'REST',
+    ],
+  },
+  {
+    title: 'Web3',
+    skills: [
+      'Solidity',
+      'Web3.js',
+      'Ethers.js',
+      'Hardhat',
+      'IPFS',
+      'Smart Contracts',
+    ],
+  },
+];
+
+type SkillAccordionProps = {
+  category: SkillCategory;
+  selectedSkills: string[];
+  onToggle: (skill: string) => void;
+};
+
+const SkillAccordion: React.FC<SkillAccordionProps> = ({
+  category,
+  selectedSkills,
+  onToggle,
+}) => {
+  return (
+    <AccordionItem
+      value={`item-${category.title}`}
+      className="border-b-0 p-4"
+    >
+      <AccordionTrigger>{category.title}</AccordionTrigger>
+      <AccordionContent>
+        <div className="flex flex-row flex-wrap gap-3">
+          {category.skills.map((skill) => (
+            <Chip
+              key={skill}
+              variant={selectedSkills.includes(skill) ? 'filled' : 'outlined'}
+              className="rounded-sm cursor-pointer"
+              onClick={() => onToggle(skill)}
+            >
+              {skill}
+            </Chip>
+          ))}
+        </div>
+      </AccordionContent>
+    </AccordionItem>
+  );
+};
+
+// Main Skills Component
 export default function Skills({
   data,
   setData,
@@ -83,40 +169,16 @@ export default function Skills({
             {...registerSkills}
             value={JSON.stringify(selectedSkills)}
           />
-
           <div className="skills w-[350px]">
             <Accordion type="single" className="w-full" collapsible>
-              <AccordionItem value="item-1" className="border-b-0">
-                <AccordionTrigger>Core Skills</AccordionTrigger>
-                <AccordionContent>
-                  <div className="flex flex-row flex-wrap gap-3">
-                    {[
-                      'React',
-                      'Node',
-                      'Express',
-                      'Typescript',
-                      'Javascript',
-                      'HTML',
-                      'CSS',
-                      'GraphQL',
-                      'Prisma',
-                      'Postgres',
-                      'CockroachDB',
-                    ].map((skill) => (
-                      <Chip
-                        key={skill}
-                        variant={
-                          selectedSkills.includes(skill) ? 'filled' : 'outlined'
-                        }
-                        className="rounded-sm cursor-pointer"
-                        onClick={() => toggleSkill(skill)}
-                      >
-                        {skill}
-                      </Chip>
-                    ))}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
+              {SKILL_CATEGORIES.map((category) => (
+                <SkillAccordion
+                  key={category.title}
+                  category={category}
+                  selectedSkills={selectedSkills}
+                  onToggle={toggleSkill}
+                />
+              ))}
             </Accordion>
           </div>
         </form>
