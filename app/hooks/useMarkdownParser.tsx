@@ -1,5 +1,5 @@
 import { dataType } from "@app/develop/page";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 
 interface FieldStyle {
   color: string;
@@ -11,7 +11,7 @@ interface FieldStyle {
 }
 
 const useMarkdownParser = (formData: dataType) => {
-  console.log(JSON.stringify(formData));
+  // console.log(JSON.stringify(formData));
   const [markdownContent, setMarkdownContent] = useState("Your markdown will appear here...");
 
   const generateField = (
@@ -52,10 +52,52 @@ ${spacer}
 </div>`
   }
 
+  const generateArraField = (
+    skills: string[] | undefined,
+    prefixSpacing: number = 1
+  ) => {
+    if (!skills || skills.length==0) return ""
+    const spacer = "\u00A0".repeat(prefixSpacing) 
+
+
+    const mapToSVG = (icon: string) => {
+      return `https://raw.githubusercontent.com/SySagar/readme.dev/6b13e6920ad532a2788c43bd37352936a16dd7d2/public/badges/${icon.toLowerCase()}.svg`
+    }
+
+    const containerStyle = `
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-block: 20px;
+    `
+
+    const contentStyle = `
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 90%;
+    gap: 10px;
+    overflow: hidden;
+    flex-wrap: wrap;
+    `
+
+    return `
+<div style="${containerStyle}">
+${spacer}
+  <div style="${contentStyle}">
+  ${skills.map((skill) => {
+    return `<img src=${mapToSVG(skill)} alt=${skill} />`
+  }).join("")}
+  </div>
+</div>`
+  }
+
+
   useEffect(() => {
     const generateMarkdown = () => {
       const content = `
   # ${formData.firstName}
+  
   ${generateField(
     formData.description,
     "⤷",
@@ -76,8 +118,8 @@ ${spacer}
     {
       color: "#DBEAFE",
       fontWeight: "100",
-      marginTop: "4px",
-      marginBottom: "4px",
+      marginTop: "30px",
+      marginBottom: "15px",
     },
     2
   )}
@@ -88,12 +130,13 @@ ${spacer}
     {
       color: "#DBEAFE",
       fontWeight: "100",
-      marginTop: "4px",
-      marginBottom: "0",
+      marginTop: "0px",
+      marginBottom: "20px",
     },
     2
   )}
-        `.trim();
+
+  ${generateArraField(formData.skills,1)}`
 
       setMarkdownContent(content);
     };
@@ -110,10 +153,10 @@ ${spacer}
 
 
 
-  useEffect(() => {
+  // useEffect(() => {
     
 
-  }, [markdownContent]);
+  // }, [markdownContent]);
 
 
 
