@@ -86,7 +86,7 @@ const SKILL_COLORS: { [key: string]: string } = {
 function generateSVG(skill: string): string {
   const width = skill.length * 8 + 40;
   const color = SKILL_COLORS[skill] || '#4A5568';
-  
+
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="32">
     <defs>
       <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -112,7 +112,10 @@ if (!fs.existsSync(badgesDir)) {
 SKILL_CATEGORIES.forEach((category) => {
   category.skills.forEach((skill) => {
     const svg = generateSVG(skill);
-    fs.writeFileSync(path.join(badgesDir, `${skill.toLowerCase().replace(/\s+/g, '-')}.svg`), svg);
+    fs.writeFileSync(
+      path.join(badgesDir, `${skill.toLowerCase().replace(/\s+/g, '-')}.svg`),
+      svg,
+    );
   });
 });
 
@@ -120,7 +123,10 @@ console.log('Badges generated successfully!', process.env.NEXT_PUBLIC_BASE_URL);
 
 const readmeSection = SKILL_CATEGORIES.map((category) => {
   const skillBadges = category.skills
-    .map((skill) => `![${skill}](${process.env.NEXT_PUBLIC_BASE_URL}/badges/${skill.toLowerCase().replace(/\s+/g, '-')}.svg)`)
+    .map(
+      (skill) =>
+        `![${skill}](${process.env.NEXT_PUBLIC_BASE_URL}/badges/${skill.toLowerCase().replace(/\s+/g, '-')}.svg)`,
+    )
     .join(' ');
   return `### ${category.title}\n\n${skillBadges}\n`;
 }).join('\n');

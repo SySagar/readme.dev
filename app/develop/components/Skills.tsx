@@ -91,10 +91,7 @@ const SkillAccordion: React.FC<SkillAccordionProps> = ({
   onToggle,
 }) => {
   return (
-    <AccordionItem
-      value={`item-${category.title}`}
-      className="border-b-0 p-4"
-    >
+    <AccordionItem value={`item-${category.title}`} className="border-b-0 p-4">
       <AccordionTrigger>{category.title}</AccordionTrigger>
       <AccordionContent>
         <div className="flex flex-row flex-wrap gap-3">
