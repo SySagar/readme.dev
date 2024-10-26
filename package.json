@@ -8,7 +8,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build-badge": "node --loader ts-node/esm ./app/lib/generate-badge.ts"
+    "format": "prettier --write ./app/**/*.{ts,tsx,js,jsx,json}",
+    "build-badge": "node --loader ts-node/esm ./app/lib/generate-badge.ts",
+    "prepare": "husky"
   },
   "dependencies": {
     "@emoji-mart/data": "^1.2.1",
@@ -45,7 +47,9 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.7",
+    "husky": "^9.1.6",
     "postcss": "^8",
+    "prettier": "3.3.3",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.6.3"
   }

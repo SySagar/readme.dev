@@ -1,13 +1,18 @@
-import React, { useEffect } from "react";
-import { FieldValues, UseFormHandleSubmit, UseFormRegister, useForm } from "react-hook-form";
-import {  Chip } from "@groovy-box/ui";
+import React, { useEffect } from 'react';
+import {
+  FieldValues,
+  UseFormHandleSubmit,
+  UseFormRegister,
+  useForm,
+} from 'react-hook-form';
+import { Chip } from '@groovy-box/ui';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@groovy-box/ui";
-import useMarkdownParser from "@app/hooks/useMarkdownParser";
+} from '@groovy-box/ui';
+import useMarkdownParser from '@app/hooks/useMarkdownParser';
 
 export type DataType = {
   firstName: string;
@@ -17,7 +22,6 @@ export type DataType = {
   skills?: string[];
 };
 
-
 type TypeBasicInfo = {
   data: DataType;
   setData: React.Dispatch<React.SetStateAction<DataType>>;
@@ -25,16 +29,20 @@ type TypeBasicInfo = {
   handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
 };
 
-export default function Skills({ data, setData, register, handleSubmit }: TypeBasicInfo) {
-
+export default function Skills({
+  data,
+  setData,
+  register,
+  handleSubmit,
+}: TypeBasicInfo) {
   const { setValue, watch } = useForm({
     defaultValues: {
       skills: data.skills || [],
     },
   });
 
-  const selectedSkills = watch("skills") || [];
-  const registerSkills = register("skills");
+  const selectedSkills = watch('skills') || [];
+  const registerSkills = register('skills');
   const markdownPreview = useMarkdownParser(data);
 
   const toggleSkill = (skill: string) => {
@@ -42,7 +50,7 @@ export default function Skills({ data, setData, register, handleSubmit }: TypeBa
       ? selectedSkills.filter((item) => item !== skill)
       : [...selectedSkills, skill];
 
-    setValue("skills", updatedSkills, {
+    setValue('skills', updatedSkills, {
       shouldValidate: true,
       shouldDirty: true,
     });
@@ -53,19 +61,14 @@ export default function Skills({ data, setData, register, handleSubmit }: TypeBa
     }));
   };
 
-
   useEffect(() => {
-    if(data.firstName === undefined && selectedSkills.length > 0){
-      
+    if (data.firstName === undefined && selectedSkills.length > 0) {
       setData({
         ...data,
-        firstName: "",
+        firstName: '',
       });
-      
     }
   }, [selectedSkills]);
-
-  
 
   return (
     <div className="main flex flex-row w-full">
@@ -88,21 +91,23 @@ export default function Skills({ data, setData, register, handleSubmit }: TypeBa
                 <AccordionContent>
                   <div className="flex flex-row flex-wrap gap-3">
                     {[
-                      "React",
-                      "Node",
-                      "Express",
-                      "Typescript",
-                      "Javascript",
-                      "HTML",
-                      "CSS",
-                      "GraphQL",
-                      "Prisma",
-                      "Postgres",
-                      "CockroachDB",
+                      'React',
+                      'Node',
+                      'Express',
+                      'Typescript',
+                      'Javascript',
+                      'HTML',
+                      'CSS',
+                      'GraphQL',
+                      'Prisma',
+                      'Postgres',
+                      'CockroachDB',
                     ].map((skill) => (
                       <Chip
                         key={skill}
-                        variant={selectedSkills.includes(skill) ? "filled" : "outlined"}
+                        variant={
+                          selectedSkills.includes(skill) ? 'filled' : 'outlined'
+                        }
                         className="rounded-sm cursor-pointer"
                         onClick={() => toggleSkill(skill)}
                       >
