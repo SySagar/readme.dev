@@ -10,5 +10,5 @@
       <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite" />
     </circle>
     <text x="54" y="16" dominant-baseline="middle" text-anchor="middle" 
-          font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Express</text>
+          font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Next.js</text>
   </svg>
