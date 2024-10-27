@@ -1,17 +1,7 @@
 import { dataType } from '@app/develop/page';
 import { useState, useEffect } from 'react';
 
-interface FieldStyle {
-  color: string;
-  fontWeight: string;
-  marginTop: string;
-  marginBottom: string;
-  marginLeft?: string;
-  maxWidth?: string;
-}
-
 const useMarkdownParser = (formData: dataType) => {
-  // console.log(JSON.stringify(formData));
   const [markdownContent, setMarkdownContent] = useState(
     'Your markdown will appear here...',
   );
@@ -19,126 +9,51 @@ const useMarkdownParser = (formData: dataType) => {
   const generateField = (
     value: string,
     prefix: string,
-    style: FieldStyle,
+    color: string,
     prefixSpacing: number = 1,
   ) => {
     if (!value) return '';
-    const spacer = '\u00A0'.repeat(prefixSpacing); // Non-breaking space
-
-    const containerStyle = `
-      display: flex;
-      align-items: flex-start;
-      margin-top: ${style.marginTop};
-      margin-bottom: ${style.marginBottom};
-      max-width: ${style.maxWidth};
-    `;
-    const iconStyle = `
-      flex-shrink: 0;
-      margin-right: 8px;
-      white-space: nowrap;
-    `;
-    const contentStyle = `
-      flex-grow: 1;
-      color: ${style.color};
-      font-weight: ${style.fontWeight};
-      max-width: ${style.maxWidth};
-      word-wrap: break-word;
-      text-align: left;
-    `;
+    const spacer = '&nbsp;'.repeat(prefixSpacing);
 
     return `
-<div style="${containerStyle}">
-${spacer}
-  <div style="${iconStyle}">${prefix}</div>
-  <p style="${contentStyle}">${value}</p>
-</div>`;
+${spacer}${prefix} <span style="color: ${color}; font-weight: 300;">${value}</span>
+
+`;
   };
 
-  const generateArraField = (
-    skills: string[] | undefined,
-    prefixSpacing: number = 1,
-  ) => {
-    if (!skills || skills.length == 0) return '';
-    const spacer = '\u00A0'.repeat(prefixSpacing);
+  const generateArrayField = (skills: string[] | undefined) => {
+    if (!skills || skills.length === 0) return '';
 
     const mapToSVG = (icon: string) => {
       return `https://raw.githubusercontent.com/SySagar/readme.dev/cced67e23e6120615abc64633c64f319803c3c18/public/badges/${icon.toLowerCase()}.svg`;
     };
 
-    const containerStyle = `
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-block: 20px;
-    `;
-
-    const contentStyle = `
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    width: 90%;
-    gap: 10px;
-    overflow: hidden;
-    flex-wrap: wrap;
-    `;
+    const skillBadges = skills
+      .map((skill) => `<img src="${mapToSVG(skill)}" alt="${skill}" /> &nbsp;`)
+      .join(' ');
 
     return `
-<div style="${containerStyle}">
-${spacer}
-  <div style="${contentStyle}">
-  ${skills
-    .map((skill) => {
-      return `<img src=${mapToSVG(skill)} alt=${skill} />`;
-    })
-    .join('')}
-  </div>
-</div>`;
+<div align="left" style="margin-top: 20px; margin-bottom: 20px; display:flex; gap:10px; overflow:hidden; word-wrap:break-word;flex-wrap:wrap;">
+  ${skillBadges}
+</div>
+`;
   };
 
   useEffect(() => {
     const generateMarkdown = () => {
-      const content = `
-  # ${formData.firstName}
-  
-  ${generateField(
-    formData.description,
-    '⤷',
-    {
-      color: '#6b7281',
-      fontWeight: '300',
-      marginTop: '0',
-      marginBottom: '8px',
-      marginLeft: '15px',
-      maxWidth: '300px',
-    },
-    12,
-  )}
-  
-  ${generateField(
-    formData.location,
-    '⚐',
-    {
-      color: '#DBEAFE',
-      fontWeight: '100',
-      marginTop: '30px',
-      marginBottom: '15px',
-    },
-    2,
-  )}
-  
-  ${generateField(
-    formData.currentlyBuilding,
-    'ϟ',
-    {
-      color: '#DBEAFE',
-      fontWeight: '100',
-      marginTop: '0px',
-      marginBottom: '20px',
-    },
-    2,
-  )}
+      const content = `# ${formData.firstName}
 
-  ${generateArraField(formData.skills, 1)}`;
+<div align="left">
+
+${generateField(formData.description, '⤷', '#6b7281', 7)}
+
+${generateField(formData.location, '⚐', '#DBEAFE', 7)}
+
+${generateField(formData.currentlyBuilding, 'ϟ', '#DBEAFE', 7)}
+### Skills
+${generateArrayField(formData.skills)}
+
+</div>`;
 
       setMarkdownContent(content);
     };
@@ -152,10 +67,6 @@ ${spacer}
       setMarkdownContent('Your markdown will appear here...');
     }
   }, [formData]);
-
-  // useEffect(() => {
-
-  // }, [markdownContent]);
 
   return markdownContent;
 };
