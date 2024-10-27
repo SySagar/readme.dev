@@ -62,7 +62,7 @@ ${spacer}
     const spacer = '\u00A0'.repeat(prefixSpacing);
 
     const mapToSVG = (icon: string) => {
-      return `https://raw.githubusercontent.com/SySagar/readme.dev/6b13e6920ad532a2788c43bd37352936a16dd7d2/public/badges/${icon.toLowerCase()}.svg`;
+      return `https://raw.githubusercontent.com/SySagar/readme.dev/cced67e23e6120615abc64633c64f319803c3c18/public/badges/${icon.toLowerCase()}.svg`;
     };
 
     const containerStyle = `
