@@ -1,0 +1,105 @@
+'use client';
+
+import * as React from 'react';
+import { useRouter } from 'next/navigation';
+import { Button } from '@groovy-box/ui';
+import Link from 'next/link';
+import ThemeSwitcher from '@app/theme/ThemeSwitcher';
+
+const SCROLL_THRESHOLD = 200;
+
+export default function Navbar() {
+  const [activeLink, setActiveLink] = React.useState('home');
+  const [scrollProgress, setScrollProgress] = React.useState(0);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrollProgress(Math.min(currentScrollY / SCROLL_THRESHOLD, 1));
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const isCompact = scrollProgress > 0;
+  const scaleValue = 1 - scrollProgress * 0.5; // Scale from 1 to 0.98
+
+  console.log('isCompact', scaleValue);
+
+  return (
+    <nav
+      className={`
+        flex items-center justify-center 
+        p-4 
+        fixed 
+        top-0 
+         z-50
+         w-full
+        transition-all duration-300 ease-in-out
+        ${isCompact ? 'bg-transparent' : 'dark:bg-black'}
+      `}
+    >
+      <div
+        className={`w-full flex  items-center justify-between 
+      transition-all duration-700 ease-in-out
+      p-4
+      ${isCompact ? 'blurNav' : 'bg-transparent'}
+      `}
+        style={{
+          width: `${scaleValue * 100}%`,
+        }}
+      >
+        <div
+          className={`flex items-center space-x-2 transition-all duration-300`}
+        >
+          <Button
+            variant="link"
+            asChild
+            className={`p-2 hover:text-slate-200 ${isCompact ? 'text-sm' : ''}`}
+          >
+            <Link href="/">Home</Link>
+          </Button>
+
+          <Button
+            variant="link"
+            className={`p-2 ${isCompact ? 'text-sm' : ''}`}
+          >
+            <Link href="/about">About</Link>
+          </Button>
+
+          <Button
+            variant="link"
+            className={`p-2 ${isCompact ? 'text-sm' : ''}`}
+          >
+            <Link href="/develop">Create</Link>
+          </Button>
+        </div>
+
+        <div className={`flex gap-3 transition-all duration-300`}>
+          <div
+            className={`
+            relative px-4 py-2 text-sm font-bold rounded-full
+            dark:bg-amber-400  bg-blue-500
+            animate-pulse
+          `}
+          >
+            <span className="relative z-10 text-white dark:text-slate-700">
+              beta
+            </span>
+            <div
+              className={`
+              absolute inset-0 rounded-full blur-[4px]
+             dark:bg-amber-400 bg-blue-400 
+            `}
+            ></div>
+          </div>
+          <ThemeSwitcher />
+        </div>
+      </div>
+    </nav>
+  );
+}

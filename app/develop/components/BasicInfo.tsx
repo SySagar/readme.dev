@@ -97,8 +97,9 @@ export default function BasicInfo({
               open={emmojiPicker}
               style={{
                 position: 'absolute',
-                bottom: '50px',
-                left: '47%',
+                zIndex: 100,
+                bottom: '70px',
+                left: '45%',
               }}
               onEmojiClick={(item) => addEmoji(item.emoji)}
             />

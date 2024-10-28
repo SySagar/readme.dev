@@ -2,6 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+h1 {
+  font-size: 56px;
+}
+h2 {
+  font-size: 40px;
+  letter-spacing: 0.01em;
+}
+h3 {
+  font-size: 36px;
+  letter-spacing: 0.015em;
+}
+h4 {
+  font-size: 28px;
+  letter-spacing: 0.02em;
+}
+h5 {
+  font-size: 20px;
+  letter-spacing: 0.03em;
+}
+h6 {
+  font-size: 16px;
+  letter-spacing: 0.04em;
+}
+.quote {
+  font-size: 24px;
+  letter-spacing: 0.02em;
+}
+.smaller_cal_sans {
+  font-size: 18px;
+  letter-spacing: 0.045em;
+}
+
 
 .markdown > * {
   all: revert;
@@ -19,6 +51,18 @@
 
 body {
   font-family: "Cal Sans",sans-serif;
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+ /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+}
 }
 
 @layer base {
@@ -134,4 +178,69 @@ input {
 .location,.description,.firstName{
   grid-column: inputs;
   grid-row: auto;
+}
+
+.bg-radial-gradient {
+  background: radial-gradient(circle, transparent 20%, var(--bg-color) 80%);
+}
+
+.grid-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 3.7rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  height: 190vmin;
+  width: 100vw;
+  border: 1px solid var(--grid-color);
+
+}
+
+.cell {
+  border: 1px solid var(--grid-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell-inner {
+  width: 100%;
+  height: 100%;
+  background-color: var(--glow-color);
+  opacity: 0.1;
+
+}
+
+.cell-inner.glow {
+  animation: randomGlow 2s infinite ease-in-out;
+}
+
+@keyframes randomGlow {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.8; }
+}
+
+:root {
+  --bg-color: white;
+  --grid-color: rgba(0, 0, 0, 0.1);
+  --glow-color: rgba(100, 100, 100, 0.2);
+}
+
+:root.dark {
+  --bg-color: black;
+  --grid-color: rgba(255, 255, 255, 0.1);
+  --glow-color: rgba(200, 200, 200, 0.2);
+}
+
+.blurNav{
+  background: rgba( 100, 100, 100, 0.50 );
+  backdrop-filter: blur( 6px );
+  -webkit-backdrop-filter: blur( 15px );
+  border-radius: 10px;
 }
