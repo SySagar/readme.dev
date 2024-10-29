@@ -58,10 +58,10 @@ export default function Develop() {
   return (
     <div className="flex relative flex-col items-center justify-center h-screen">
       <Toaster />
-      <Text variant="heading-1" className="absolute top-8 left-16 py-16">
+      <Text variant="heading-1" className="absolute top-28 left-16 py-16 ">
         Create Your Story
       </Text>
-      <div className="main flex flex-row  min-w-full px-48 mt-48 py-8 gap-20">
+      <div className="main flex flex-row  min-w-full px-48 mt-48 py-8 gap-20 pt-44">
         <div className="form-view flex flex-1  flex-col gap-52">
           <div className="form-body flex flex-col gap-8">
             <Tabs
