@@ -52,7 +52,7 @@ ${spacer}${prefix} <span style="color: ${color}; font-weight: 300;">${value}</sp
 ${generateField(formData.description, '⤷', '#6b7281', 7)}
 
 <div style="display: flex; align-items: center; margin-top: 20px;margin-bottom: 30px">
-${formData.contacts && Object.entries(formData.contacts).length > 0 ? generateSocialLinks(formData.contacts as SocialMediaData, 7,2) : ''}
+${formData.contacts && Object.entries(formData.contacts).length > 0 ? generateSocialLinks(formData.contacts as SocialMediaData, 7, 2) : ''}
 </div>
 
 ${generateField(formData.location, '⚐', '#DBEAFE', 7)}

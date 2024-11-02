@@ -1,6 +1,7 @@
 import { imageConfigDefault } from 'next/dist/shared/lib/image-config';
 
 type SocialPlatform =
+  | 'email'
   | 'instagram'
   | 'twitter'
   | 'linkedin'
@@ -24,7 +25,13 @@ interface SocialMediaData {
   website?: string;
 }
 
-const PLATFORM_CONFIG = {
+const PLATFORM_CONFIG 
+: Record<SocialPlatform, {
+    baseUrl: string;
+    svg: string;
+    formatHandle: (handle: string) => string
+    }>
+= {
   instagram: {
     baseUrl: 'https://instagram.com/',
     svg: `instagram`,
@@ -63,6 +70,11 @@ const PLATFORM_CONFIG = {
   behance: {
     baseUrl: 'https://behance.net/',
     svg: `palette`,
+    formatHandle: (handle: string) => handle,
+  },
+  discord: {
+    baseUrl: 'https://discord.com/',
+    svg: `discord`,
     formatHandle: (handle: string) => handle,
   },
   website: {
