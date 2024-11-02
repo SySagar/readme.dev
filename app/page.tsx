@@ -4,10 +4,12 @@ import { useState, useEffect, useRef } from 'react';
 import { Button } from '@groovy-box/ui';
 import Navbar from './components/Navbar';
 import moment from 'moment';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const [currentWord, setCurrentWord] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const router = useRouter();
   const words = ['Amazing', 'Dynamic', 'Fantastic'];
 
   useEffect(() => {
@@ -66,7 +68,7 @@ export default function Home() {
 
       <div className="absolute inset-0 bg-radial-gradient"></div>
 
-      <div className={`absolute top-1/2 -translate-y-1/2  w-full`}>
+      <div className={`absolute top-1/2 -translate-y-1/2  w-full z-50`}>
         <div className="flex flex-col items-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-8 text-center  whitespace-nowrap ">
             Build{''}
@@ -89,29 +91,48 @@ export default function Home() {
             experience, transforming your ideas into polished documentation.
           </p>
           <div className="flex flex-row gap-3 mt-16">
-            <Button>Start Building</Button>
-            <Button variant="outline">Book a demo</Button>
+            <Button
+              onClick={() => {
+                router.push('/develop');
+              }}
+            >
+              Start Building
+            </Button>
+            <a
+              href="https://github.com/SySagar/readme.dev/issues"
+              target="_blank"
+            >
+              <Button variant="outline">Suggest options</Button>
+            </a>
           </div>
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-[100px]">
+      <div className="absolute bottom-8 left-1/2 -translate-x-[100px] z-20">
         <div className="flex flex-col gap-2 text-[#71717a] items-center">
           <p className="font-light text-sm">
             Built using
-            <span className="dark:text-white text-black text-md px-1">
+            <a
+              href="https://ui.soumyasagar.in/"
+              target="_blank"
+              className="dark:text-white text-black text-md px-1"
+            >
               Groovy Box
-            </span>
+            </a>
             and
-            <span className="dark:text-white text-black text-md px-1">
+            <a
+              href="https://nextjs.org/"
+              target="_blank"
+              className="dark:text-white text-black text-md px-1"
+            >
               NextJS
-            </span>
+            </a>
           </p>
           <p className="text-sm">© {moment().format('YYYY')} Readme.dev</p>
         </div>
       </div>
 
-      <div className="grid-container border">
+      <div className="grid-container border -z-10">
         <div className="grid">
           {[...Array(100)].map((_, i) => (
             <div key={i} className="cell">

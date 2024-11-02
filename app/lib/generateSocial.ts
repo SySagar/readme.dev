@@ -25,13 +25,14 @@ interface SocialMediaData {
   website?: string;
 }
 
-const PLATFORM_CONFIG 
-: Record<SocialPlatform, {
+const PLATFORM_CONFIG: Record<
+  SocialPlatform,
+  {
     baseUrl: string;
     svg: string;
-    formatHandle: (handle: string) => string
-    }>
-= {
+    formatHandle: (handle: string) => string;
+  }
+> = {
   instagram: {
     baseUrl: 'https://instagram.com/',
     svg: `instagram`,
