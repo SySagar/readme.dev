@@ -28,8 +28,6 @@ export default function Navbar() {
   const isCompact = scrollProgress > 0;
   const scaleValue = 1 - scrollProgress * 0.5; // Scale from 1 to 0.98
 
-  console.log('isCompact', scaleValue);
-
   return (
     <nav
       className={`
@@ -79,23 +77,24 @@ export default function Navbar() {
           </Button>
         </div>
 
-        <div className={`flex gap-3 transition-all duration-300`}>
+        <div className={`flex gap-3 items-center  transition-all duration-300`}>
           <div
             className={`
-            relative px-4 py-2 text-sm font-bold rounded-full
-            dark:bg-amber-400  bg-blue-500
+            relative 
+            flex
+            text-sm font-bold 
+            h-fit
+            px-3
+            py-1
+            rounded-full
+            border-2
+            dark:bg-orange-400  bg-blue-500
             animate-pulse
           `}
           >
-            <span className="relative z-10 text-white dark:text-slate-700">
+            <span className="relative z-10 text-white dark:text-[#3d0000]">
               beta
             </span>
-            <div
-              className={`
-              absolute inset-0 rounded-full blur-[4px]
-             dark:bg-amber-400 bg-blue-400 
-            `}
-            ></div>
           </div>
           <ThemeSwitcher />
         </div>

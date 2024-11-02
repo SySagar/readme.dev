@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Button, Text } from '@groovy-box/ui';
+import { Button } from '@groovy-box/ui';
+import Navbar from './components/Navbar';
 import moment from 'moment';
 
 export default function Home() {
@@ -39,6 +40,7 @@ export default function Home() {
 
   return (
     <div className="h-screen w-screen bg-white text-black dark:bg-black dark:text-white overflow-hidden relative transition-colors duration-300">
+      <Navbar />
       {/* Bird background */}
       <div className="absolute inset-0 opacity-20">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -88,7 +90,7 @@ export default function Home() {
           </p>
           <div className="flex flex-row gap-3 mt-16">
             <Button>Start Building</Button>
-            <Button variant={'outline'}>Book a demo</Button>
+            <Button variant="outline">Book a demo</Button>
           </div>
         </div>
       </div>

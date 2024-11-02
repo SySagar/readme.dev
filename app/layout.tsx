@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import './globals.css';
 import 'cal-sans';
 import { Providers } from './Provider';
-import Navbar from './components/Navbar';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,10 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <Providers>
-          <Navbar />
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

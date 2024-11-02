@@ -1,5 +1,9 @@
 import { dataType } from '@app/develop/page';
 import { useState, useEffect } from 'react';
+import {
+  generateSocialLinks,
+  type SocialMediaData,
+} from '@app/lib/generateSocial';
 
 const useMarkdownParser = (formData: dataType) => {
   const [markdownContent, setMarkdownContent] = useState(
@@ -25,7 +29,7 @@ ${spacer}${prefix} <span style="color: ${color}; font-weight: 300;">${value}</sp
     if (!skills || skills.length === 0) return '';
 
     const mapToSVG = (icon: string) => {
-      return `https://raw.githubusercontent.com/SySagar/readme.dev/cced67e23e6120615abc64633c64f319803c3c18/public/badges/${icon.toLowerCase()}.svg`;
+      return `https://raw.githubusercontent.com/SySagar/readme.dev/main/public/badges/${icon.toLowerCase()}.svg`;
     };
 
     const skillBadges = skills
@@ -41,17 +45,24 @@ ${spacer}${prefix} <span style="color: ${color}; font-weight: 300;">${value}</sp
 
   useEffect(() => {
     const generateMarkdown = () => {
-      const content = `# ${formData.firstName}
+      const content = `# ${formData.firstName ? formData.firstName : ''}
 
 <div align="left">
 
 ${generateField(formData.description, '⤷', '#6b7281', 7)}
 
+<div style="display: flex; align-items: center; margin-top: 20px;margin-bottom: 30px">
+${formData.contacts && Object.entries(formData.contacts).length > 0 ? generateSocialLinks(formData.contacts as SocialMediaData, 7, 2) : ''}
+</div>
+
 ${generateField(formData.location, '⚐', '#DBEAFE', 7)}
 
 ${generateField(formData.currentlyBuilding, 'ϟ', '#DBEAFE', 7)}
-### Skills
-${generateArrayField(formData.skills)}
+
+<br/>
+
+${formData.skills && formData.skills.length > 0 ? `#### Skills` : ''}
+${formData.skills && formData.skills.length > 0 ? generateArrayField(formData.skills) : ''}
 
 </div>`;
 

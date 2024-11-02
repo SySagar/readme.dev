@@ -16,6 +16,7 @@ import {
 } from '@app/components/ui/tabs';
 import BasicInfo from './components/BasicInfo';
 import Skills from './components/Skills';
+import Contacts from './components/Contacts';
 
 export type dataType = {
   firstName: string;
@@ -23,6 +24,18 @@ export type dataType = {
   location: string;
   currentlyBuilding: string;
   skills?: string[];
+  contacts?: {
+    email: string;
+    twitter: string;
+    linkedin: string;
+    youtube: string;
+    dribble: string;
+    discord: string;
+    twitch: string;
+    behance: string;
+    instagram: string;
+    website: string;
+  };
 };
 
 export default function Develop() {
@@ -34,7 +47,7 @@ export default function Develop() {
   const markdownPreview = useMarkdownParser(data);
   const [viewType, setViewType] = useState<'markdown' | 'preview'>('preview');
 
-  console.log('markdownPreview', markdownPreview);
+  console.log('data', data);
 
   const copyMD = async () => {
     await navigator.clipboard
@@ -58,10 +71,10 @@ export default function Develop() {
   return (
     <div className="flex relative flex-col items-center justify-center h-screen">
       <Toaster />
-      <Text variant="heading-1" className="absolute top-8 left-16 py-16">
+      <Text variant="heading-1" className="absolute top-28 left-16 py-16 ">
         Create Your Story
       </Text>
-      <div className="main flex flex-row  min-w-full px-48 mt-48 py-8 gap-20">
+      <div className="main flex flex-row  min-w-full px-48 mt-48 py-8 gap-20 pt-44">
         <div className="form-view flex flex-1  flex-col gap-52">
           <div className="form-body flex flex-col gap-8">
             <Tabs
@@ -71,6 +84,7 @@ export default function Develop() {
               <TabsList>
                 <TabsTrigger value="basic-info">Basic Info</TabsTrigger>
                 <TabsTrigger value="skills">Skills</TabsTrigger>
+                <TabsTrigger value="contacts">Contacts</TabsTrigger>
               </TabsList>
               <TabsContent value="basic-info" className="w-full">
                 <BasicInfo
@@ -82,6 +96,14 @@ export default function Develop() {
               </TabsContent>
               <TabsContent value="skills">
                 <Skills
+                  data={data}
+                  setData={setData}
+                  register={register}
+                  handleSubmit={handleSubmit}
+                />
+              </TabsContent>
+              <TabsContent value="contacts">
+                <Contacts
                   data={data}
                   setData={setData}
                   register={register}

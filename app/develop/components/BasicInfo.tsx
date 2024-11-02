@@ -15,14 +15,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import EmojiPicker from 'emoji-picker-react';
 import { Smile } from 'lucide-react';
-
-export type dataType = {
-  firstName: string;
-  description: string;
-  location: string;
-  currentlyBuilding: string;
-  skills?: string[];
-};
+import { dataType } from '../page';
 
 type typeBasicInfo = {
   data: dataType;
@@ -48,8 +41,6 @@ export default function BasicInfo({
     }));
   };
 
-  console.log('data main', data);
-
   const handleEmoji = (e: any) => {
     e.preventDefault();
     setEmmojiPicker(!emmojiPicker);
@@ -65,6 +56,10 @@ export default function BasicInfo({
               setData((prev) => ({
                 ...prev,
                 ...data,
+                contacts:
+                  prev.contacts && Object.entries(prev.contacts).length > 0
+                    ? (prev.contacts as any)
+                    : [],
                 skills:
                   prev.skills && prev.skills.length > 0 ? prev.skills : [],
               }));

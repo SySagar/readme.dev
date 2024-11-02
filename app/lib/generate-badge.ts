@@ -131,7 +131,7 @@ const readmeSection = SKILL_CATEGORIES.map((category) => {
   return `### ${category.title}\n\n${skillBadges}\n`;
 }).join('\n');
 
-const fullReadmeSection = `# My Skills\n\n${readmeSection}`;
+const fullReadmeSection = `\n\n${readmeSection}`;
 
 console.log('Add this to your README.md:');
 console.log(fullReadmeSection);

@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
-import { Button } from '../components/ui/button';
+import { Button } from '@groovy-box/ui';
 import Image from 'next/image';
 
 import { Sun, Moon } from 'lucide-react';
@@ -27,7 +27,7 @@ const ThemeSwitcher = () => {
   if (resolvedTheme === 'dark') {
     return (
       <Button
-        variant={'ghost'}
+        variant={'link'}
         onClick={() => setTheme('light')}
         aria-label="Switch to light mode"
       >
@@ -39,7 +39,7 @@ const ThemeSwitcher = () => {
   if (resolvedTheme === 'light') {
     return (
       <Button
-        variant={'ghost'}
+        variant={'link'}
         onClick={() => setTheme('dark')}
         aria-label="Switch to dark mode"
       >
