@@ -28,7 +28,6 @@ export default function Navbar() {
   const isCompact = scrollProgress > 0;
   const scaleValue = 1 - scrollProgress * 0.5; // Scale from 1 to 0.98
 
-
   return (
     <nav
       className={`
@@ -96,7 +95,6 @@ export default function Navbar() {
             <span className="relative z-10 text-white dark:text-[#3d0000]">
               beta
             </span>
-            
           </div>
           <ThemeSwitcher />
         </div>

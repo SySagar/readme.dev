@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Button} from '@groovy-box/ui';
+import { Button } from '@groovy-box/ui';
 import Navbar from './components/Navbar';
 import moment from 'moment';
 
@@ -90,7 +90,7 @@ export default function Home() {
           </p>
           <div className="flex flex-row gap-3 mt-16">
             <Button>Start Building</Button>
-            <Button variant='outline'>Book a demo</Button>
+            <Button variant="outline">Book a demo</Button>
           </div>
         </div>
       </div>
