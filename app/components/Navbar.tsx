@@ -32,7 +32,8 @@ export default function Navbar() {
     <nav
       className={`
         flex items-center justify-center 
-        p-4 
+        p-2
+        sm:p-4 
         fixed 
         top-0 
          z-50
@@ -44,7 +45,8 @@ export default function Navbar() {
       <div
         className={`w-full flex  items-center justify-between 
       transition-all duration-700 ease-in-out
-      p-4
+      p-2
+      sm:p-4
       ${isCompact ? 'blurNav' : 'bg-transparent'}
       `}
         style={{
@@ -52,32 +54,34 @@ export default function Navbar() {
         }}
       >
         <div
-          className={`flex items-center space-x-2 transition-all duration-300`}
+          className={`flex items-center sm:space-x-2 transition-all duration-300`}
         >
           <Button
             variant="link"
             asChild
-            className={`p-2 hover:text-slate-200 ${isCompact ? 'text-sm' : ''}`}
+            className={`p-0 sm:p-2 hover:text-slate-200  ${isCompact ? 'text-sm' : ''}`}
           >
             <Link href="/">Home</Link>
           </Button>
 
           <Button
             variant="link"
-            className={`p-2 ${isCompact ? 'text-sm' : ''}`}
+            asChild
+            className={`p-0 sm:p-2 ${isCompact ? 'text-sm' : ''}`}
           >
             <Link href="/about">About</Link>
           </Button>
 
           <Button
             variant="link"
-            className={`p-2 ${isCompact ? 'text-sm' : ''}`}
+            asChild
+            className={`p-0 sm:p-2 ${isCompact ? 'text-sm' : ''}`}
           >
             <Link href="/develop">Create</Link>
           </Button>
         </div>
 
-        <div className={`flex gap-3 items-center  transition-all duration-300`}>
+        <div className={`flex gap-2 sm:gap-3 items-center  transition-all duration-300`}>
           <div
             className={`
             relative 
@@ -92,7 +96,7 @@ export default function Navbar() {
             animate-pulse
           `}
           >
-            <span className="relative z-10 text-white dark:text-[#3d0000]">
+            <span className="relative z-10 text-[10px] sm:text-sm text-white dark:text-[#3d0000]">
               beta
             </span>
           </div>

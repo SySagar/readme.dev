@@ -12,6 +12,8 @@ export default function Home() {
   const router = useRouter();
   const words = ['Amazing', 'Dynamic', 'Fantastic'];
 
+  const [cellCount, setCellCount] = useState(100);
+
   useEffect(() => {
     setMounted(true);
 
@@ -20,6 +22,19 @@ export default function Home() {
     }, 2500);
     return () => clearInterval(interval);
   }, [currentWord]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isLargeScreen = window.innerWidth >= 1024; 
+      setCellCount(isLargeScreen ? 100 : 200);
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const updateGlowingCells = () => {
@@ -70,7 +85,7 @@ export default function Home() {
 
       <div className={`absolute top-1/2 -translate-y-1/2  w-full z-50`}>
         <div className="flex flex-col items-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-8 text-center  whitespace-nowrap ">
+          <h1 className="text-2xl hidden lg:block sm:text-4xl md:text-6xl  font-bold mb-8 text-center whitespace-nowrap ">
             Build{''}
             {words.map((word, index) => (
               <span
@@ -86,7 +101,24 @@ export default function Home() {
             ))}
             <span className="ml-72">Readme for Github</span>
           </h1>
-          <p className="text-[#71717a] w-1/3 text-center">
+          <h3 className="inline lg:hidden font-bold mb-8 text-left lg:text-center whitespace-nowrap ">
+            Build{''}
+            {words.map((word, index) => (
+              <span
+                key={word}
+                className={`absolute transition-all blur duration-1000 ease-in-out ml-5 ${
+                  index === currentWord
+                    ? 'opacity-100 blur-none translate-y-0'
+                    : 'opacity-0 blur-md translate-y-4'
+                }`}
+              >
+                {word}
+              </span>
+            ))}
+            <br className='lg:hidden' />
+            <span className="lg:ml-72">Readme for Github</span>
+          </h3>
+          <p className="text-[#71717a] w-5/6 md:w-1/3 text-center">
             Say goodbye to tedious README writing. Our tool offers a seamless
             experience, transforming your ideas into polished documentation.
           </p>
@@ -110,7 +142,7 @@ export default function Home() {
 
       <div className="absolute bottom-8 left-1/2 -translate-x-[100px] z-20">
         <div className="flex flex-col gap-2 text-[#71717a] items-center">
-          <p className="font-light text-sm">
+          <p className="font-light text-[12px] sm:text-sm">
             Built using
             <a
               href="https://ui.soumyasagar.in/"
@@ -128,14 +160,14 @@ export default function Home() {
               NextJS
             </a>
           </p>
-          <p className="text-sm">© {moment().format('YYYY')} Readme.dev</p>
+          <p className=" text-[12px] sm:text-sm">© {moment().format('YYYY')} Readme.dev</p>
         </div>
       </div>
 
-      <div className="grid-container border -z-10">
-        <div className="grid">
-          {[...Array(100)].map((_, i) => (
-            <div key={i} className="cell">
+      <div className="grid-container h-full pt-1 sm:pt-[3.7rem] border -z-10">
+        <div className="grid h-[180vmin] w-[100vw] lg:h-[190vmin] lg:w-[100vw]">
+          {[...Array(cellCount)].map((_, i) => (
+            <div key={i} className="cell w-[70px] md:w-full ">
               <div className="cell-inner"></div>
             </div>
           ))}

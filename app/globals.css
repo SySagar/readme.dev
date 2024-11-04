@@ -189,15 +189,12 @@ input {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding-top: 3.7rem;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(12, 1fr);
-  height: 190vmin;
-  width: 100vw;
   border: 1px solid var(--grid-color);
 
 }
