@@ -25,7 +25,7 @@ export default function Home() {
 
   useEffect(() => {
     const handleResize = () => {
-      const isLargeScreen = window.innerWidth >= 1024; 
+      const isLargeScreen = window.innerWidth >= 1024;
       setCellCount(isLargeScreen ? 100 : 200);
     };
 
@@ -115,7 +115,7 @@ export default function Home() {
                 {word}
               </span>
             ))}
-            <br className='lg:hidden' />
+            <br className="lg:hidden" />
             <span className="lg:ml-72">Readme for Github</span>
           </h3>
           <p className="text-[#71717a] w-5/6 md:w-1/3 text-center">
@@ -160,7 +160,9 @@ export default function Home() {
               NextJS
             </a>
           </p>
-          <p className=" text-[12px] sm:text-sm">© {moment().format('YYYY')} Readme.dev</p>
+          <p className=" text-[12px] sm:text-sm">
+            © {moment().format('YYYY')} Readme.dev
+          </p>
         </div>
       </div>
 

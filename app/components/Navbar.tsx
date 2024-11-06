@@ -81,7 +81,9 @@ export default function Navbar() {
           </Button>
         </div>
 
-        <div className={`flex gap-2 sm:gap-3 items-center  transition-all duration-300`}>
+        <div
+          className={`flex gap-2 sm:gap-3 items-center  transition-all duration-300`}
+        >
           <div
             className={`
             relative 

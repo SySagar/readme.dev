@@ -53,7 +53,6 @@ export default function Contacts({
   register,
   handleSubmit,
 }: typeContacts) {
-  const markdownPreview = useMarkdownParser(data);
   const addEmoji = (emoji: any) => {
     setData((prev) => ({
       ...prev,

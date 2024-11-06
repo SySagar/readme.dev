@@ -64,6 +64,10 @@ ${generateField(formData.currentlyBuilding, 'ϟ', '#DBEAFE', 7)}
 ${formData.skills && formData.skills.length > 0 ? `#### Skills` : ''}
 ${formData.skills && formData.skills.length > 0 ? generateArrayField(formData.skills) : ''}
 
+<br/>
+
+${formData.showCounter.value ? `![](https://komarev.com/ghpvc/?username=${formData.showCounter.handle})`:``}
+
 </div>`;
 
       setMarkdownContent(content);

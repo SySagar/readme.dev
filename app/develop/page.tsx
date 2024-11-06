@@ -16,6 +16,7 @@ import {
 } from '@app/components/ui/tabs';
 import BasicInfo from './components/BasicInfo';
 import Skills from './components/Skills';
+import AdditionalData from './components/AdditionalData';
 import Contacts from './components/Contacts';
 
 export type dataType = {
@@ -24,6 +25,10 @@ export type dataType = {
   location: string;
   currentlyBuilding: string;
   skills?: string[];
+  showCounter: {
+    value: boolean;
+    handle: string;
+  };
   contacts?: {
     email: string;
     twitter: string;
@@ -85,6 +90,7 @@ export default function Develop() {
                 <TabsTrigger value="basic-info">Basic Info</TabsTrigger>
                 <TabsTrigger value="skills">Skills</TabsTrigger>
                 <TabsTrigger value="contacts">Contacts</TabsTrigger>
+                <TabsTrigger value="additional">Additional</TabsTrigger>
               </TabsList>
               <TabsContent value="basic-info" className="w-full">
                 <BasicInfo
@@ -110,6 +116,14 @@ export default function Develop() {
                   handleSubmit={handleSubmit}
                 />
               </TabsContent>
+              <TabsContent value="additional">
+                <AdditionalData
+                  data={data}
+                  setData={setData}
+                  register={register}
+                  handleSubmit={handleSubmit}
+                />
+                    </TabsContent>
             </Tabs>
 
             {/* <input type="submit" /> */}
