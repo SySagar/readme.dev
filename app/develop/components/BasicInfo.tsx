@@ -114,7 +114,7 @@ export default function BasicInfo({
             <input
               className="currentlyBuilding"
               {...register('currentlyBuilding')}
-              placeholder="Currently Building"
+              placeholder="Currently Building , Link"
             />
           </form>
         </div>

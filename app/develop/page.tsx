@@ -29,6 +29,10 @@ export type dataType = {
     value: boolean;
     handle: string;
   };
+  showTrophies: {
+    value: boolean;
+    handle: string;
+  };
   contacts?: {
     email: string;
     twitter: string;
@@ -123,7 +127,7 @@ export default function Develop() {
                   register={register}
                   handleSubmit={handleSubmit}
                 />
-                    </TabsContent>
+              </TabsContent>
             </Tabs>
 
             {/* <input type="submit" /> */}

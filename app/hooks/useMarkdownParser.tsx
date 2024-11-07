@@ -4,6 +4,7 @@ import {
   generateSocialLinks,
   type SocialMediaData,
 } from '@app/lib/generateSocial';
+import { split } from 'postcss/lib/list';
 
 const useMarkdownParser = (formData: dataType) => {
   const [markdownContent, setMarkdownContent] = useState(
@@ -15,12 +16,18 @@ const useMarkdownParser = (formData: dataType) => {
     prefix: string,
     color: string,
     prefixSpacing: number = 1,
+    prefixWords: string = '',
+    type: string = 'span',
+    link: string = '',
   ) => {
     if (!value) return '';
     const spacer = '&nbsp;'.repeat(prefixSpacing);
 
+    const validTag = ['p', 'span', 'a'].includes(type.toLowerCase()) ? type.toLowerCase() : 'span';
+    const anchorStyle = validTag === 'a' ? 'text-decoration: underline; text-decoration-color: slategray;' : '';
+
     return `
-${spacer}${prefix} <span style="color: ${color}; font-weight: 300;">${value}</span>
+${spacer}${prefix} ${prefixWords} <${validTag} ${validTag==='a' && `href='${link}'`} ${validTag==='a' && `target="_blank"`} style="color: ${color}; font-weight: 300; ${anchorStyle}">${value}</${validTag}>
 
 `;
   };
@@ -57,7 +64,9 @@ ${formData.contacts && Object.entries(formData.contacts).length > 0 ? generateSo
 
 ${generateField(formData.location, '⚐', '#DBEAFE', 7)}
 
-${generateField(formData.currentlyBuilding, 'ϟ', '#DBEAFE', 7)}
+<br/>
+
+${formData.currentlyBuilding ? generateField(formData.currentlyBuilding.split(',')[0], 'ϟ', '#DBEAFE', 7, 'Building','a',formData.currentlyBuilding.replace(/\s+/g, '').split(',')[1]):''}
 
 <br/>
 
@@ -66,7 +75,12 @@ ${formData.skills && formData.skills.length > 0 ? generateArrayField(formData.sk
 
 <br/>
 
-${formData.showCounter.value ? `![](https://komarev.com/ghpvc/?username=${formData.showCounter.handle})`:``}
+${Object.entries(formData).length > 0 && formData.showTrophies && formData.showTrophies.value ? `![trophy](https://github-profile-trophy.vercel.app/?username=${formData.showTrophies.handle})` : ``}
+
+
+<br/>
+
+${Object.entries(formData).length > 0 && formData.showCounter && formData.showCounter.value ? `![](https://komarev.com/ghpvc/?username=${formData.showCounter.handle})` : ``}
 
 </div>`;
 
