@@ -26,6 +26,19 @@ export type dataType = {
   location: string;
   currentlyBuilding: string;
   skills?: string[];
+  showCounter: {
+    value: boolean;
+    handle: string;
+  };
+  showTrophies: {
+    value: boolean;
+    handle: string;
+  };
+  showStats: {
+    value: boolean;
+    theme: string;
+    handle: string;
+  };
   contacts?: {
     email: string;
     twitter: string;
@@ -53,7 +66,6 @@ export default function Contacts({
   register,
   handleSubmit,
 }: typeContacts) {
-  const markdownPreview = useMarkdownParser(data);
   const addEmoji = (emoji: any) => {
     setData((prev) => ({
       ...prev,

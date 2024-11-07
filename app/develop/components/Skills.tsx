@@ -21,6 +21,31 @@ export type DataType = {
   location: string;
   currentlyBuilding: string;
   skills?: string[];
+  showCounter: {
+    value: boolean;
+    handle: string;
+  };
+  showTrophies: {
+    value: boolean;
+    handle: string;
+  };
+  showStats: {
+    value: boolean;
+    theme: string;
+    handle: string;
+  };
+  contacts?: {
+    email: string;
+    twitter: string;
+    linkedin: string;
+    youtube: string;
+    dribble: string;
+    discord: string;
+    twitch: string;
+    behance: string;
+    instagram: string;
+    website: string;
+  };
 };
 
 type TypeBasicInfo = {
@@ -126,7 +151,6 @@ export default function Skills({
 
   const selectedSkills = watch('skills') || [];
   const registerSkills = register('skills');
-  const markdownPreview = useMarkdownParser(data);
 
   const toggleSkill = (skill: string) => {
     const updatedSkills = selectedSkills.includes(skill)

@@ -93,7 +93,7 @@ export default function BasicInfo({
               style={{
                 position: 'absolute',
                 zIndex: 100,
-                bottom: '70px',
+                bottom: '10px',
                 left: '45%',
               }}
               onEmojiClick={(item) => addEmoji(item.emoji)}
@@ -114,7 +114,7 @@ export default function BasicInfo({
             <input
               className="currentlyBuilding"
               {...register('currentlyBuilding')}
-              placeholder="Currently Building"
+              placeholder="Currently Building , Link"
             />
           </form>
         </div>
