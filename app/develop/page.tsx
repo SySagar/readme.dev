@@ -33,6 +33,11 @@ export type dataType = {
     value: boolean;
     handle: string;
   };
+  showStats: {
+    value: boolean;
+    theme: string;
+    handle: string;
+  };
   contacts?: {
     email: string;
     twitter: string;

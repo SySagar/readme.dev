@@ -23,11 +23,16 @@ const useMarkdownParser = (formData: dataType) => {
     if (!value) return '';
     const spacer = '&nbsp;'.repeat(prefixSpacing);
 
-    const validTag = ['p', 'span', 'a'].includes(type.toLowerCase()) ? type.toLowerCase() : 'span';
-    const anchorStyle = validTag === 'a' ? 'text-decoration: underline; text-decoration-color: slategray;' : '';
+    const validTag = ['p', 'span', 'a'].includes(type.toLowerCase())
+      ? type.toLowerCase()
+      : 'span';
+    const anchorStyle =
+      validTag === 'a'
+        ? 'text-decoration: underline; text-decoration-color: slategray;'
+        : '';
 
     return `
-${spacer}${prefix} ${prefixWords} <${validTag} ${validTag==='a' && `href='${link}'`} ${validTag==='a' && `target="_blank"`} style="color: ${color}; font-weight: 300; ${anchorStyle}">${value}</${validTag}>
+${spacer}${prefix} ${prefixWords} <${validTag} ${validTag === 'a' && `href='${link}'`} ${validTag === 'a' && `target="_blank"`} style="color: ${color}; font-weight: 300; ${anchorStyle}">${value}</${validTag}>
 
 `;
   };
@@ -66,12 +71,16 @@ ${generateField(formData.location, '⚐', '#DBEAFE', 7)}
 
 <br/>
 
-${formData.currentlyBuilding ? generateField(formData.currentlyBuilding.split(',')[0], 'ϟ', '#DBEAFE', 7, 'Building','a',formData.currentlyBuilding.replace(/\s+/g, '').split(',')[1]):''}
+${formData.currentlyBuilding ? generateField(formData.currentlyBuilding.split(',')[0], 'ϟ', '#DBEAFE', 7, 'Building', 'a', formData.currentlyBuilding.replace(/\s+/g, '').split(',')[1]) : ''}
 
 <br/>
 
 ${formData.skills && formData.skills.length > 0 ? `#### Skills` : ''}
 ${formData.skills && formData.skills.length > 0 ? generateArrayField(formData.skills) : ''}
+
+<br/>
+
+${Object.entries(formData).length > 0 && formData.showStats && String(formData.showStats.value).trim() !== '' ? `![GitHub stats](https://github-readme-stats.vercel.app/api?username=${formData.showStats.handle}&show_icons=true&theme=${formData.showStats.theme})` : ``}
 
 <br/>
 
