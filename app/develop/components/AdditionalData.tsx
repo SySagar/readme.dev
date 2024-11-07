@@ -123,7 +123,7 @@ export default function AdditionalData({
       ...prevData,
       showStats: {
         value: true,
-        handle: data.showStats.handle,
+        handle: data.showStats ? data.showStats.handle : '',
         theme: val,
       },
     }));

@@ -21,15 +21,15 @@ export type DataType = {
   location: string;
   currentlyBuilding: string;
   skills?: string[];
-  showCounter: {
+  showCounter?: {
     value: boolean;
     handle: string;
   };
-  showTrophies: {
+  showTrophies?: {
     value: boolean;
     handle: string;
   };
-  showStats: {
+  showStats?: {
     value: boolean;
     theme: string;
     handle: string;
