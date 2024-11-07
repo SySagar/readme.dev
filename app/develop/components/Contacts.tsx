@@ -44,7 +44,7 @@ export default function Contacts({
       <div className="form-view flex flex-1  flex-col gap-52">
         <div className="form-body flex flex-col gap-8">
           <form
-            className="flex flex-col gap-4 w-[700px]"
+            className="flex flex-col gap-4 w-[600px]"
             onChange={handleSubmit((data) => {
               setData((prev) => ({
                 ...prev,
