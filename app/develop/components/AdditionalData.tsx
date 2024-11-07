@@ -7,7 +7,7 @@ import {
   UseFormRegister,
   set,
 } from 'react-hook-form';
-import { Text, Button, Label } from '@groovy-box/ui';
+import { Label } from '@groovy-box/ui';
 import { Switch } from '@groovy-box/ui';
 import { dataType } from '../page';
 import { SelectIcon } from '@radix-ui/react-select';
@@ -18,9 +18,6 @@ import {
   SelectContent,
   SelectItem,
   SelectGroup,
-  SelectLabel,
-  SelectScrollUpButton,
-  SelectScrollDownButton,
   SelectValue,
 } from '@groovy-box/ui';
 
@@ -29,6 +26,14 @@ type typeBasicInfo = {
   setData: React.Dispatch<React.SetStateAction<dataType>>;
   register: UseFormRegister<FieldValues>;
   handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
+};
+
+type SelectiveDataType = {
+  [K in 'showCounter' | 'showTrophies' | 'showStats']?: {
+    value: boolean;
+    handle: string;
+    theme?: string;
+  };
 };
 
 export default function AdditionalData({
@@ -65,23 +70,28 @@ export default function AdditionalData({
     }));
   };
 
-  const handleSwitchChange = (checked: boolean, type: keyof dataType) => {
+  const handleSwitchChange = (
+    checked: boolean,
+    type: keyof SelectiveDataType,
+  ) => {
     setData((prevData) => ({
       ...prevData,
       [type]: {
         value: checked,
-        handle: '',
+        handle: prevData[type]?.handle,
       },
     }));
   };
 
-  const handleStatsSwitchChange = (checked: boolean, type: keyof dataType) => {
-    console.log('checked', type);
+  const handleStatsSwitchChange = (
+    checked: boolean,
+    type: keyof SelectiveDataType,
+  ) => {
     setData((prevData) => ({
       ...prevData,
       [type]: {
         value: checked,
-        handle: '',
+        handle: prevData[type]?.handle,
         theme: 'radical',
       },
     }));
@@ -165,6 +175,7 @@ export default function AdditionalData({
                     <input
                       id="profileHandle"
                       type="text"
+                      placeholder="github handle"
                       className="rounded-md border px-3 py-2"
                       {...register('showCounter.handle')}
                       onChange={(e) => handleGithubChange(e, 'showCounter')}
@@ -197,6 +208,7 @@ export default function AdditionalData({
                     <input
                       id="profileHandle"
                       type="text"
+                      placeholder="github handle"
                       className="rounded-md border px-3 py-2"
                       {...register('showTrophies.handle')}
                       onChange={(e) => handleGithubChange(e, 'showTrophies')}
@@ -230,6 +242,7 @@ export default function AdditionalData({
                     <Label htmlFor="profileHandle text-nowrap">Handle</Label>
                     <input
                       id="profileHandle"
+                      placeholder="github handle"
                       type="text"
                       className="rounded-md border px-3 py-2"
                       {...register('showStats.handle')}

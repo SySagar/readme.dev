@@ -64,14 +64,11 @@ ${spacer}${prefix} ${prefixWords} <${validTag} ${validTag === 'a' && `href='${li
 
 ${generateField(formData.description, '⤷', '#6b7281', 7)}
 
-<div style="display: flex; align-items: center; margin-top: 20px;margin-bottom: 30px">
-${formData.contacts && Object.entries(formData.contacts).length > 0 ? generateSocialLinks(formData.contacts as SocialMediaData, 7, 2) : ''}
+<div style="display: ${formData.contacts && Object.entries(formData.contacts).length > 0 ? 'flex' : 'none'}; align-items: center; margin-top: 20px;margin-bottom: 30px">
+  ${formData.contacts && Object.entries(formData.contacts).length > 0 ? generateSocialLinks(formData.contacts as SocialMediaData, 7, 2) : ''}
 </div>
 
 ${generateField(formData.location, '⚐', '#DBEAFE', 7)}
-
-<br/>
-
 ${formData.currentlyBuilding ? generateField(formData.currentlyBuilding.split(',')[0], 'ϟ', '#DBEAFE', 7, 'Building', 'a', formData.currentlyBuilding.replace(/\s+/g, '').split(',')[1]) : ''}
 
 <br/>
@@ -85,12 +82,12 @@ ${Object.entries(formData).length > 0 && formData.showStats && formData.showStat
 
 <br/>
 
-${Object.entries(formData).length > 0 && formData.showTrophies && formData.showTrophies.value && formData.showTrophies.value ? `![trophies](https://github-profile-trophy.vercel.app/?username=${formData.showTrophies.handle})` : ``}
+${Object.entries(formData).length > 0 && formData.showTrophies && formData.showTrophies.value && String(formData.showTrophies.handle).trim() !== '' ? `![trophies](https://github-profile-trophy.vercel.app/?username=${formData.showTrophies.handle})` : ``}
 
 
 <br/>
 
-${Object.entries(formData).length > 0 && formData.showCounter && formData.showCounter.value ? `![counter](https://komarev.com/ghpvc/?username=${formData.showCounter.handle})` : ``}
+${Object.entries(formData).length > 0 && formData.showCounter && formData.showCounter.value && String(formData.showCounter.handle).trim() !== '' ? `![counter](https://komarev.com/ghpvc/?username=${formData.showCounter.handle})` : ``}
 
 </div>`;
 
