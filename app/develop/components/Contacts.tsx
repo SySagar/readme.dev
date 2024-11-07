@@ -7,8 +7,7 @@ import {
   UseFormRegister,
 } from 'react-hook-form';
 import { Text, Button, Label } from '@groovy-box/ui';
-import Markdown from 'react-markdown';
-import useMarkdownParser from '@app/hooks/useMarkdownParser';
+import { dataType } from '../page';
 import {
   Globe,
   Mail,
@@ -19,39 +18,6 @@ import {
   Dribbble,
   Instagram,
 } from 'lucide-react';
-
-export type dataType = {
-  firstName: string;
-  description: string;
-  location: string;
-  currentlyBuilding: string;
-  skills?: string[];
-  showCounter: {
-    value: boolean;
-    handle: string;
-  };
-  showTrophies: {
-    value: boolean;
-    handle: string;
-  };
-  showStats: {
-    value: boolean;
-    theme: string;
-    handle: string;
-  };
-  contacts?: {
-    email: string;
-    twitter: string;
-    linkedin: string;
-    youtube: string;
-    dribble: string;
-    discord: string;
-    twitch: string;
-    behance: string;
-    instagram: string;
-    website: string;
-  };
-};
 
 type typeContacts = {
   data: dataType;
@@ -91,9 +57,9 @@ export default function Contacts({
               }));
             })}
           >
-            <div className="flex border  border-[#666666] justify-start items-center rounded-md">
+            <div className="flex border  border-[#666666] justify-start items-center rounded-sm">
               <Label
-                className=" bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3  border-[#666666] flex items-center justify-center gap-2 text-center"
+                className=" bg-[#f5f5f5]  dark:bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3  border-[#666666] flex items-center justify-center gap-2 text-center"
                 htmlFor="website"
               >
                 <Globe width={15} height={15} />
@@ -106,9 +72,9 @@ export default function Contacts({
               />
             </div>
 
-            <div className="flex border border-[#666666] justify-start items-center rounded-md rounded-sm">
+            <div className="flex border border-[#666666] justify-start items-center rounded-sm">
               <Label
-                className="bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3 border-[#666666] flex items-center justify-center gap-2"
+                className="bg-[#f5f5f5]  dark:bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3 border-[#666666] flex items-center justify-center gap-2"
                 htmlFor="email"
               >
                 <Mail width={15} height={15} />
@@ -122,9 +88,9 @@ export default function Contacts({
             </div>
 
             {/* Twitter */}
-            <div className="flex border border-[#666666] justify-start items-center rounded-md rounded-sm">
+            <div className="flex border border-[#666666] justify-start items-center rounded-sm">
               <Label
-                className="bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3 border-[#666666] flex items-center justify-center gap-2"
+                className="bg-[#f5f5f5]  dark:bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3 border-[#666666] flex items-center justify-center gap-2"
                 htmlFor="twitter"
               >
                 <Twitter width={15} height={15} />
@@ -138,9 +104,9 @@ export default function Contacts({
             </div>
 
             {/* LinkedIn */}
-            <div className="flex border border-[#666666] justify-start items-center rounded-md rounded-sm">
+            <div className="flex border border-[#666666] justify-start items-center  rounded-sm">
               <Label
-                className="bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3 border-[#666666] flex items-center justify-center gap-2"
+                className="bg-[#f5f5f5]  dark:bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3 border-[#666666] flex items-center justify-center gap-2"
                 htmlFor="linkedin"
               >
                 <Linkedin width={15} height={15} />
@@ -154,9 +120,9 @@ export default function Contacts({
             </div>
 
             {/* YouTube */}
-            <div className="flex border border-[#666666] justify-start items-center rounded-md rounded-sm">
+            <div className="flex border border-[#666666] justify-start items-center  rounded-sm">
               <Label
-                className="bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3 border-[#666666] flex items-center justify-center gap-2"
+                className="bg-[#f5f5f5]  dark:bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3 border-[#666666] flex items-center justify-center gap-2"
                 htmlFor="youtube"
               >
                 <Youtube width={15} height={15} />
@@ -170,9 +136,9 @@ export default function Contacts({
             </div>
 
             {/* Discord */}
-            <div className="flex border border-[#666666] justify-start items-center rounded-md rounded-sm">
+            <div className="flex border border-[#666666] justify-start items-center rounded-sm">
               <Label
-                className="bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3 border-[#666666] flex items-center justify-center gap-2"
+                className="bg-[#f5f5f5]  dark:bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3 border-[#666666] flex items-center justify-center gap-2"
                 htmlFor="discord"
               >
                 <div>discord</div>
@@ -188,7 +154,7 @@ export default function Contacts({
             {/* Behance */}
             <div className="flex border border-[#666666] justify-start items-center rounded-md rounded-sm">
               <Label
-                className="bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3 border-[#666666] flex items-center justify-center gap-2"
+                className="bg-[#f5f5f5]  dark:bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3 border-[#666666] flex items-center justify-center gap-2"
                 htmlFor="behance"
               >
                 <Palette width={15} height={15} />
@@ -204,7 +170,7 @@ export default function Contacts({
             {/* Dribbble */}
             <div className="flex border border-[#666666] justify-start items-center rounded-md rounded-sm">
               <Label
-                className="bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3 border-[#666666] flex items-center justify-center gap-2"
+                className="bg-[#f5f5f5]  dark:bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3 border-[#666666] flex items-center justify-center gap-2"
                 htmlFor="dribble"
               >
                 <Dribbble width={15} height={15} />
@@ -220,7 +186,7 @@ export default function Contacts({
             {/* Instagram */}
             <div className="flex border border-[#666666] justify-start items-center rounded-md rounded-sm">
               <Label
-                className="bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3 border-[#666666] flex items-center justify-center gap-2"
+                className="bg-[#f5f5f5]  dark:bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3 border-[#666666] flex items-center justify-center gap-2"
                 htmlFor="instagram"
               >
                 <Instagram width={15} height={15} />

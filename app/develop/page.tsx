@@ -25,15 +25,15 @@ export type dataType = {
   location: string;
   currentlyBuilding: string;
   skills?: string[];
-  showCounter: {
+  showCounter?: {
     value: boolean;
     handle: string;
   };
-  showTrophies: {
+  showTrophies?: {
     value: boolean;
     handle: string;
   };
-  showStats: {
+  showStats?: {
     value: boolean;
     theme: string;
     handle: string;
@@ -85,9 +85,10 @@ export default function Develop() {
   return (
     <div className="flex relative flex-col items-center justify-center h-screen">
       <Toaster />
-      <Text variant="heading-1" className="absolute top-28 left-16 py-16 ">
+      <p className="text-4xl font-bold text-center text-black dark:text-white absolute top-10">
         Create Your Story
-      </Text>
+      </p>
+
       <div className="main flex flex-row  min-w-full px-48 mt-48 py-8 gap-20 pt-44">
         <div className="form-view flex flex-1  flex-col gap-52">
           <div className="form-body flex flex-col gap-8">
@@ -101,7 +102,7 @@ export default function Develop() {
                 <TabsTrigger value="contacts">Contacts</TabsTrigger>
                 <TabsTrigger value="additional">Additional</TabsTrigger>
               </TabsList>
-              <TabsContent value="basic-info" className="w-full">
+              <TabsContent value="basic-info" className="w-full mt-5">
                 <BasicInfo
                   data={data}
                   setData={setData}
@@ -125,7 +126,7 @@ export default function Develop() {
                   handleSubmit={handleSubmit}
                 />
               </TabsContent>
-              <TabsContent value="additional">
+              <TabsContent value="additional" className="mt-5">
                 <AdditionalData
                   data={data}
                   setData={setData}
@@ -134,24 +135,17 @@ export default function Develop() {
                 />
               </TabsContent>
             </Tabs>
-
-            {/* <input type="submit" /> */}
-            <div className="w-full flex justify-center">
-              <Button variant={'default'} type="submit" className="max-w-24">
-                submit
-              </Button>
-            </div>
           </div>
         </div>
         <div className="flex flex-col flex-1 justify-start items-start border-[#575757] border-2 rounded-lg h-[800px] ">
-          <div className="preview relative flex flex-1 p-6 pb-0 rounded-t-lg  w-full border-[#575757] border-b-2">
+          <div className="preview relative flex flex-1 p-6 rounded-t-lg  overflow-scroll no-scrollbar w-full border-[#575757] border-b-2 h-[650px]">
             {viewType === 'preview' ? (
               <div>
                 {markdownPreview ? (
                   <Markdown
                     remarkPlugins={[remarkGfm]}
                     rehypePlugins={[rehypeRaw]}
-                    className="markdown"
+                    className="markdown pb-2"
                   >
                     {markdownPreview}
                   </Markdown>

@@ -55,13 +55,10 @@ export default function BasicInfo({
             onChange={handleSubmit((data) => {
               setData((prev) => ({
                 ...prev,
-                ...data,
-                contacts:
-                  prev.contacts && Object.entries(prev.contacts).length > 0
-                    ? (prev.contacts as any)
-                    : [],
-                skills:
-                  prev.skills && prev.skills.length > 0 ? prev.skills : [],
+                firstName: data.firstName,
+                description: data.description,
+                location: data.location,
+                currentlyBuilding: data.currentlyBuilding,
               }));
             })}
           >
