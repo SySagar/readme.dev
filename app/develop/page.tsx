@@ -18,6 +18,7 @@ import BasicInfo from './components/BasicInfo';
 import Skills from './components/Skills';
 import AdditionalData from './components/AdditionalData';
 import Contacts from './components/Contacts';
+import { ChevronLeft } from 'lucide-react';
 
 export type dataType = {
   firstName: string;
@@ -83,13 +84,19 @@ export default function Develop() {
   };
 
   return (
-    <div className="flex relative flex-col items-center justify-center h-screen">
-      <Toaster />
-      <p className="text-4xl font-bold text-center text-black dark:text-white absolute top-10">
+    <div className="flex relative flex-col items-center justify-start gap-16 h-screen">
+      <p className="text-4xl font-bold text-center text-black dark:text-white z-20 py-8">
         Create Your Story
       </p>
 
-      <div className="main flex flex-row  min-w-full px-48 mt-48 py-8 gap-20 pt-44">
+      <div className="absolute top-8 right-10">
+        <a href="/" className="flex gap-1 items-center justify-center text-sm">
+          <ChevronLeft size={15} />
+          <span className="mt-1">Go home</span>
+        </a>
+      </div>
+
+      <div className="main flex flex-row  min-w-full px-48 pb-8 gap-20">
         <div className="form-view flex flex-1  flex-col gap-52">
           <div className="form-body flex flex-col gap-8">
             <Tabs
@@ -110,7 +117,7 @@ export default function Develop() {
                   handleSubmit={handleSubmit}
                 />
               </TabsContent>
-              <TabsContent value="skills">
+              <TabsContent value="skills" className="mt-5">
                 <Skills
                   data={data}
                   setData={setData}
@@ -118,7 +125,7 @@ export default function Develop() {
                   handleSubmit={handleSubmit}
                 />
               </TabsContent>
-              <TabsContent value="contacts">
+              <TabsContent value="contacts" className="mt-5">
                 <Contacts
                   data={data}
                   setData={setData}

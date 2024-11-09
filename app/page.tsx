@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Button } from '@groovy-box/ui';
 import Navbar from './components/Navbar';
 import moment from 'moment';
+import PageAnimateLayout from '@app/layout/PageAnimateLayout';
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
@@ -59,6 +60,7 @@ export default function Home() {
     <div className="h-screen w-screen bg-white text-black dark:bg-black dark:text-white overflow-hidden relative transition-colors duration-300">
       <Navbar />
       {/* Bird background */}
+
       <div className="absolute inset-0 opacity-20">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -139,7 +141,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
       <div className="absolute bottom-8 left-1/2 -translate-x-[100px] z-20">
         <div className="flex flex-col gap-2 text-[#71717a] items-center">
           <p className="font-light text-[12px] sm:text-sm">
