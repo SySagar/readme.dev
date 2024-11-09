@@ -13,6 +13,7 @@ import {
   AccordionTrigger,
 } from '@groovy-box/ui';
 import useMarkdownParser from '@app/hooks/useMarkdownParser';
+import AnimateLayout from '@app/layout/AnimateLaoyout';
 
 // Types
 export type DataType = {
@@ -178,32 +179,34 @@ export default function Skills({
   }, [selectedSkills]);
 
   return (
-    <div className="main flex flex-row w-full">
-      <div className="form-view flex flex-1 flex-col gap-8">
-        <form
-          onChange={handleSubmit((data) => {
-            setData(data as DataType);
-          })}
-        >
-          <input
-            type="hidden"
-            {...registerSkills}
-            value={JSON.stringify(selectedSkills)}
-          />
-          <div className="skills w-[350px]">
-            <Accordion type="single" className="w-full" collapsible>
-              {SKILL_CATEGORIES.map((category) => (
-                <SkillAccordion
-                  key={category.title}
-                  category={category}
-                  selectedSkills={selectedSkills}
-                  onToggle={toggleSkill}
-                />
-              ))}
-            </Accordion>
-          </div>
-        </form>
+    <AnimateLayout>
+      <div className="main flex flex-row w-full">
+        <div className="form-view flex flex-1 flex-col gap-8">
+          <form
+            onChange={handleSubmit((data) => {
+              setData(data as DataType);
+            })}
+          >
+            <input
+              type="hidden"
+              {...registerSkills}
+              value={JSON.stringify(selectedSkills)}
+            />
+            <div className="skills w-[350px]">
+              <Accordion type="single" className="w-full" collapsible>
+                {SKILL_CATEGORIES.map((category) => (
+                  <SkillAccordion
+                    key={category.title}
+                    category={category}
+                    selectedSkills={selectedSkills}
+                    onToggle={toggleSkill}
+                  />
+                ))}
+              </Accordion>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </AnimateLayout>
   );
 }

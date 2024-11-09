@@ -1,3 +1,4 @@
+import PageAnimateLayout from '@app/layout/PageAnimateLayout';
 import Test from './Test';
 
 export default function Layout({
@@ -8,7 +9,7 @@ export default function Layout({
   return (
     <>
       <Test />
-      {children}
+      <PageAnimateLayout>{children}</PageAnimateLayout>
     </>
   );
 }

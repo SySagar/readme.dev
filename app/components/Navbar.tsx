@@ -39,7 +39,7 @@ export default function Navbar() {
          z-50
          w-full
         transition-all duration-300 ease-in-out
-        ${isCompact ? 'bg-transparent' : 'dark:bg-black'}
+        ${isCompact ? 'bg-transparent' : 'dark:bg-transparent'}
       `}
     >
       <div
