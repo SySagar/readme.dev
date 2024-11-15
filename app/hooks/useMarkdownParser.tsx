@@ -4,10 +4,9 @@ import {
   generateSocialLinks,
   type SocialMediaData,
 } from '@app/lib/generateSocial';
-import { split } from 'postcss/lib/list';
-import { tree } from 'next/dist/build/templates/app-page';
 
-const useMarkdownParser = (formData: dataType) => {
+
+const useMarkdownParser = (formData: dataType,resolvedTheme?:string) => {
   const [markdownContent, setMarkdownContent] = useState(
     'Your markdown will appear here...',
   );
@@ -23,6 +22,10 @@ const useMarkdownParser = (formData: dataType) => {
   ) => {
     if (!value) return '';
     const spacer = '&nbsp;'.repeat(prefixSpacing);
+
+    if(resolvedTheme === 'light'){
+      color = '#343434'
+    }
 
     const validTag = ['p', 'span', 'a'].includes(type.toLowerCase())
       ? type.toLowerCase()
@@ -78,16 +81,16 @@ ${formData.skills && formData.skills.length > 0 ? generateArrayField(formData.sk
 
 <br/>
 
-${Object.entries(formData).length > 0 && formData.showStats && formData.showStats.value && String(formData.showStats.handle).trim() !== '' ? `![GitHub stats](https://github-readme-stats.vercel.app/api?username=${formData.showStats.handle}&show_icons=true&theme=${formData.showStats.theme})` : ``}
+${Object.entries(formData).length > 0 && formData.showStats && formData.showStats.value  && formData.showStats.handle && String(formData.showStats.handle).trim() !== '' ? `![GitHub stats](https://github-readme-stats.vercel.app/api?username=${formData.showStats.handle}&show_icons=true&theme=${formData.showStats.theme})` : ``}
 
 <br/>
 
-${Object.entries(formData).length > 0 && formData.showTrophies && formData.showTrophies.value && String(formData.showTrophies.handle).trim() !== '' ? `![trophies](https://github-profile-trophy.vercel.app/?username=${formData.showTrophies.handle})` : ``}
+${Object.entries(formData).length > 0 && formData.showTrophies && formData.showTrophies.value  && formData.showTrophies.handle && String(formData.showTrophies.handle).trim() !== '' ? `![trophies](https://github-profile-trophy.vercel.app/?username=${formData.showTrophies.handle})` : ``}
 
 
 <br/>
 
-${Object.entries(formData).length > 0 && formData.showCounter && formData.showCounter.value && String(formData.showCounter.handle).trim() !== '' ? `![counter](https://komarev.com/ghpvc/?username=${formData.showCounter.handle})` : ``}
+${Object.entries(formData).length > 0 && formData.showCounter && formData.showCounter.handle && String(formData.showCounter.handle).trim() !== '' ? `![counter](https://komarev.com/ghpvc/?username=${formData.showCounter.handle})` : ``}
 
 </div>`;
 
