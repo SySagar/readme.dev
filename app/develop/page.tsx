@@ -18,7 +18,11 @@ import BasicInfo from './components/BasicInfo';
 import Skills from './components/Skills';
 import AdditionalData from './components/AdditionalData';
 import Contacts from './components/Contacts';
+// import { formSchema, FormData } from '@app/schema/contactsSchema';
+// import { zodResolver } from '@hookform/resolvers/zod';
 import { ChevronLeft } from 'lucide-react';
+import { useTheme } from 'next-themes';
+
 
 export type dataType = {
   firstName: string;
@@ -40,29 +44,64 @@ export type dataType = {
     handle: string;
   };
   contacts?: {
-    email: string;
-    twitter: string;
-    linkedin: string;
-    youtube: string;
-    dribble: string;
-    discord: string;
-    twitch: string;
-    behance: string;
-    instagram: string;
-    website: string;
+    email?: string;
+    twitter?: string;
+    linkedin?: string;
+    youtube?: string;
+    dribble?: string;
+    discord?: string;
+    twitch?: string;
+    behance?: string;
+    instagram?: string;
+    website?: string;
   };
 };
 
 export default function Develop() {
-  const { register, handleSubmit, watch } = useForm();
-  const [data, setData] = useState<dataType>({} as dataType);
+  const { register, handleSubmit, formState:{errors} } = useForm();
+  const [data, setData] = useState<dataType>({
+    firstName: '',
+    description: '',
+    location: '',
+    currentlyBuilding: '',
+    skills: [],
+    showCounter: {
+      value: false,
+      handle: '',
+    },
+    showTrophies: {
+      value: false,
+      handle: '',
+    },
+    showStats: {
+      value: false,
+      theme: '',
+      handle: '',
+    },
+    contacts: {
+      email: '',
+      twitter: '',
+      linkedin: '',
+      youtube: '',
+      dribble: '',
+      discord: '',
+      twitch: '',
+      behance: '',
+      instagram: '',
+      website: '',
+    },
+  } as dataType);
   const mdEditor = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
-  const markdownPreview = useMarkdownParser(data);
+  const { resolvedTheme } = useTheme();
+  console.log('resolvedTheme', resolvedTheme);
+
+  const markdownPreview = useMarkdownParser(data,resolvedTheme);
   const [viewType, setViewType] = useState<'markdown' | 'preview'>('preview');
 
   console.log('data', data);
+  console.log('oapge errors', errors);
 
   const copyMD = async () => {
     await navigator.clipboard
@@ -85,18 +124,18 @@ export default function Develop() {
 
   return (
     <div className="flex relative flex-col items-center justify-start gap-16 h-screen">
-      <p className="text-4xl font-bold text-center text-black dark:text-white z-20 py-8">
+      <p className="hidden sm:block text-4xl font-bold text-center text-black dark:text-white z-20 py-8">
         Create Your Story
       </p>
 
-      <div className="absolute top-8 right-10">
+      <div className="hidden sm:block absolute top-8 right-10">
         <a href="/" className="flex gap-1 items-center justify-center text-sm">
           <ChevronLeft size={15} />
           <span className="mt-1">Go home</span>
         </a>
       </div>
 
-      <div className="main flex flex-row  min-w-full px-48 pb-8 gap-20">
+      <div className="hidden sm:flex main flex-row  min-w-full px-48 pb-8 gap-20">
         <div className="form-view flex flex-1  flex-col gap-52">
           <div className="form-body flex flex-col gap-8">
             <Tabs
@@ -115,6 +154,7 @@ export default function Develop() {
                   setData={setData}
                   register={register}
                   handleSubmit={handleSubmit}
+                  errors={errors}
                 />
               </TabsContent>
               <TabsContent value="skills" className="mt-5">
@@ -131,6 +171,7 @@ export default function Develop() {
                   setData={setData}
                   register={register}
                   handleSubmit={handleSubmit}
+                  errors={errors}
                 />
               </TabsContent>
               <TabsContent value="additional" className="mt-5">
@@ -144,8 +185,8 @@ export default function Develop() {
             </Tabs>
           </div>
         </div>
-        <div className="flex flex-col flex-1 justify-start items-start border-[#575757] border-2 rounded-lg h-[800px] ">
-          <div className="preview relative flex flex-1 p-6 rounded-t-lg  overflow-scroll no-scrollbar w-full border-[#575757] border-b-2 h-[650px]">
+        <div className="flex flex-col flex-1 justify-start items-start border-[#575757] border-2 rounded-lg h-[700px] ">
+          <div className="preview relative flex flex-1 p-6 rounded-t-lg    overflow-scroll no-scrollbar w-full border-[#575757] border-b-2 h-[650px]">
             {viewType === 'preview' ? (
               <div>
                 {markdownPreview ? (
@@ -191,6 +232,12 @@ export default function Develop() {
             </Button>
           </div>
         </div>
+      </div>
+
+      <div className=' md:hidden flex relative flex-col items-center px-4  gap-16 h-screen justify-center'>
+        <Text variant='subtitle-2'>
+        We recommend using the product in larger screens for better experience
+        </Text>
       </div>
     </div>
   );

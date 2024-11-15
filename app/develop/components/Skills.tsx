@@ -12,7 +12,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@groovy-box/ui';
-import useMarkdownParser from '@app/hooks/useMarkdownParser';
 import AnimateLayout from '@app/layout/AnimateLaoyout';
 
 // Types
@@ -36,24 +35,24 @@ export type DataType = {
     handle: string;
   };
   contacts?: {
-    email: string;
-    twitter: string;
-    linkedin: string;
-    youtube: string;
-    dribble: string;
-    discord: string;
-    twitch: string;
-    behance: string;
-    instagram: string;
-    website: string;
+    email?: string;
+    twitter?: string;
+    linkedin?: string;
+    youtube?: string;
+    dribble?: string;
+    discord?: string;
+    twitch?: string;
+    behance?: string;
+    instagram?: string;
+    website?: string;
   };
 };
 
 type TypeBasicInfo = {
   data: DataType;
   setData: React.Dispatch<React.SetStateAction<DataType>>;
-  register: UseFormRegister<FieldValues>;
-  handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
+  register: UseFormRegister<any>;
+  handleSubmit: UseFormHandleSubmit<any, undefined>;
 };
 
 type SkillCategory = {
@@ -142,7 +141,7 @@ export default function Skills({
   data,
   setData,
   register,
-  handleSubmit,
+  handleSubmit
 }: TypeBasicInfo) {
   const { setValue, watch } = useForm({
     defaultValues: {

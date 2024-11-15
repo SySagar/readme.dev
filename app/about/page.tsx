@@ -23,12 +23,9 @@ export default function page() {
               <br />
               <br />
               <br />
-              Although I am not a fan of fancy readme but I know that it is
-              important to have a good readme for your project. So I made this
-              tool to help you create a fancy readme for your project. This
-              really helps people to understand your project better and also
-              helps you to get more stars on your project. Hence why worry
-              maintaing those stuff when we can automate right?
+              Also this is the first project which uses my own design ui kit - <a className='dark:text-slate-200 text-slate-700 font-bold' target='_blank' href="https://ui.soumyasagar.in/">Groovy Box UI</a><br/>
+              with tailwindcss. I am very excited to see how it goes. Although it isn't that perfect but I am happy with the result as I am
+              able to test my own design system in real world project.
             </Text>
           </div>
         </div>

@@ -23,8 +23,9 @@ import AnimateLayout from '@app/layout/AnimateLaoyout';
 type typeContacts = {
   data: dataType;
   setData: React.Dispatch<React.SetStateAction<dataType>>;
-  register: UseFormRegister<FieldValues>;
-  handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
+  register: UseFormRegister<any>; 
+  handleSubmit: UseFormHandleSubmit<any, undefined>;
+  errors: any;
 };
 
 export default function Contacts({
@@ -32,13 +33,9 @@ export default function Contacts({
   setData,
   register,
   handleSubmit,
+  errors
 }: typeContacts) {
-  const addEmoji = (emoji: any) => {
-    setData((prev) => ({
-      ...prev,
-      description: prev.description + emoji,
-    }));
-  };
+
 
   return (
     <AnimateLayout>
@@ -48,10 +45,9 @@ export default function Contacts({
             <form
               className="flex flex-col gap-4 w-[600px]"
               onChange={handleSubmit((data) => {
+                console.log("contacts",data)
                 setData((prev) => ({
                   ...prev,
-                  skills:
-                    prev.skills && prev.skills.length > 0 ? prev.skills : [],
                   contacts: {
                     ...prev.contacts,
                     ...data.contacts,
@@ -85,9 +81,13 @@ export default function Contacts({
                 <input
                   className="w-full border-none outline-none"
                   {...register('contacts.email')}
+                  type='email'
                   placeholder="example@email.com"
                 />
               </div>
+              {
+                   errors.contacts?.email && <span className="text-red-500 text-xs">{errors.contacts.email.message}</span>
+                }
 
               {/* Twitter */}
               <div className="flex border border-[#666666] justify-start items-center rounded-sm">
@@ -154,7 +154,7 @@ export default function Contacts({
               </div>
 
               {/* Behance */}
-              <div className="flex border border-[#666666] justify-start items-center rounded-md rounded-sm">
+              <div className="flex border border-[#666666] justify-start items-center rounded-sm">
                 <Label
                   className="bg-[#f5f5f5]  dark:bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3 border-[#666666] flex items-center justify-center gap-2"
                   htmlFor="behance"
@@ -170,7 +170,7 @@ export default function Contacts({
               </div>
 
               {/* Dribbble */}
-              <div className="flex border border-[#666666] justify-start items-center rounded-md rounded-sm">
+              <div className="flex border border-[#666666] justify-start items-center rounded-sm">
                 <Label
                   className="bg-[#f5f5f5]  dark:bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3 border-[#666666] flex items-center justify-center gap-2"
                   htmlFor="dribble"
@@ -186,7 +186,7 @@ export default function Contacts({
               </div>
 
               {/* Instagram */}
-              <div className="flex border border-[#666666] justify-start items-center rounded-md rounded-sm">
+              <div className="flex border border-[#666666] justify-start items-center rounded-sm">
                 <Label
                   className="bg-[#f5f5f5]  dark:bg-[#1d1d1d] text-[#98a3a3] text-nowrap border-r-2 p-3 border-[#666666] flex items-center justify-center gap-2"
                   htmlFor="instagram"
