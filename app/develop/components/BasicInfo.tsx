@@ -1,6 +1,11 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
-import { FieldValues, UseFormHandleSubmit, UseFormRegister, useForm } from 'react-hook-form';
+import {
+  FieldValues,
+  UseFormHandleSubmit,
+  UseFormRegister,
+  useForm,
+} from 'react-hook-form';
 import { Text, Button, Label } from '@groovy-box/ui';
 import useMarkdownParser from '@app/hooks/useMarkdownParser';
 import AnimateLayout from '@app/layout/AnimateLaoyout';
@@ -21,7 +26,7 @@ export default function BasicInfo({
   setData,
   register,
   handleSubmit,
-  errors
+  errors,
 }: typeBasicInfo) {
   const [emmojiPicker, setEmmojiPicker] = useState(false);
   const emojiPickerRef = useRef<HTMLDivElement>(null);
@@ -45,7 +50,10 @@ export default function BasicInfo({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (emojiPickerRef.current && !emojiPickerRef.current.contains(event.target as Node)) {
+      if (
+        emojiPickerRef.current &&
+        !emojiPickerRef.current.contains(event.target as Node)
+      ) {
         closeEmoji();
       }
     };
@@ -57,7 +65,6 @@ export default function BasicInfo({
   }, []);
 
   const onFormChange = handleSubmit((formData) => {
- 
     setData((prev) => ({
       ...prev,
       firstName: formData.firstName || prev.firstName,
@@ -86,45 +93,45 @@ export default function BasicInfo({
               <Label className="form__label" htmlFor="description">
                 Description:
               </Label>
-              <div className='flex flex-col justify-start items-start w-full '>
-                
-              <div className="flex w-full gap-2 relative">
-                <textarea
-                  {...register('description')}
-                  value={data.description || ''}
-                  onChange={(e) => {
-                    setData(prev => ({
-                      ...prev,
-                      description: e.target.value
-                    }));
-                  }}
-                  className="description"
-                  placeholder="Briefly describe about yourself"
-                />
-                <Button onClick={handleEmoji} variant={'outline'} size={'sm'}>
-                  <Smile size={15} />
-                </Button>
-              </div>
-              {emmojiPicker && (
-                <div 
-                  ref={emojiPickerRef}
-                  className='absolute z-50 right-0 top-1/4'
-                >
-                  <EmojiPicker
-                    width={300}
-                    height={400}
-                    onEmojiClick={addEmoji}
+              <div className="flex flex-col justify-start items-start w-full ">
+                <div className="flex w-full gap-2 relative">
+                  <textarea
+                    {...register('description')}
+                    value={data.description || ''}
+                    onChange={(e) => {
+                      setData((prev) => ({
+                        ...prev,
+                        description: e.target.value,
+                      }));
+                    }}
+                    className="description"
+                    placeholder="Briefly describe about yourself"
                   />
+                  <Button onClick={handleEmoji} variant={'outline'} size={'sm'}>
+                    <Smile size={15} />
+                  </Button>
                 </div>
-              )}
-              {
-                errors.description && (
-                  <Text variant="body-3" alignment='left' className="text-red-500">
+                {emmojiPicker && (
+                  <div
+                    ref={emojiPickerRef}
+                    className="absolute z-50 right-0 top-1/4"
+                  >
+                    <EmojiPicker
+                      width={300}
+                      height={400}
+                      onEmojiClick={addEmoji}
+                    />
+                  </div>
+                )}
+                {errors.description && (
+                  <Text
+                    variant="body-3"
+                    alignment="left"
+                    className="text-red-500"
+                  >
                     {errors.description.message}
                   </Text>
-                )
-              }
-              
+                )}
               </div>
 
               <Label className="form__label text-nowrap" htmlFor="location">
@@ -137,7 +144,10 @@ export default function BasicInfo({
                 placeholder="Your location"
               />
 
-              <Label className="form__label text-nowrap" htmlFor="currentlyBuilding">
+              <Label
+                className="form__label text-nowrap"
+                htmlFor="currentlyBuilding"
+              >
                 Currently Building:
               </Label>
               <input

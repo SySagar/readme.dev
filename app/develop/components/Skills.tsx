@@ -141,7 +141,7 @@ export default function Skills({
   data,
   setData,
   register,
-  handleSubmit
+  handleSubmit,
 }: TypeBasicInfo) {
   const { setValue, watch } = useForm({
     defaultValues: {

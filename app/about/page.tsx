@@ -23,9 +23,18 @@ export default function page() {
               <br />
               <br />
               <br />
-              Also this is the first project which uses my own design ui kit - <a className='dark:text-slate-200 text-slate-700 font-bold' target='_blank' href="https://ui.soumyasagar.in/">Groovy Box UI</a><br/>
-              with tailwindcss. I am very excited to see how it goes. Although it isn't that perfect but I am happy with the result as I am
-              able to test my own design system in real world project.
+              Also this is the first project which uses my own design ui kit -{' '}
+              <a
+                className="dark:text-slate-200 text-slate-700 font-bold"
+                target="_blank"
+                href="https://ui.soumyasagar.in/"
+              >
+                Groovy Box UI
+              </a>
+              <br />
+              with tailwindcss. I am very excited to see how it goes. Although
+              it isn't that perfect but I am happy with the result as I am able
+              to test my own design system in real world project.
             </Text>
           </div>
         </div>
