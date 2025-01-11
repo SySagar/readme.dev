@@ -1,12 +1,7 @@
 'use client';
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import {
-  FieldValues,
-  UseFormHandleSubmit,
-  UseFormRegister,
-} from 'react-hook-form';
-import { Text, Button, Label } from '@groovy-box/ui';
+import React from 'react';
+import { UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
+import { Text, Label } from '@groovy-box/ui';
 import { dataType } from '../page';
 import {
   Globe,
@@ -23,20 +18,17 @@ import AnimateLayout from '@app/layout/AnimateLaoyout';
 type typeContacts = {
   data: dataType;
   setData: React.Dispatch<React.SetStateAction<dataType>>;
-  register: UseFormRegister<any>; 
+  register: UseFormRegister<any>;
   handleSubmit: UseFormHandleSubmit<any, undefined>;
   errors: any;
 };
 
 export default function Contacts({
-  data,
   setData,
   register,
   handleSubmit,
-  errors
+  errors,
 }: typeContacts) {
-
-
   return (
     <AnimateLayout>
       <div className="main flex flex-row w-full">
@@ -45,7 +37,7 @@ export default function Contacts({
             <form
               className="flex flex-col gap-4 w-[600px]"
               onChange={handleSubmit((data) => {
-                console.log("contacts",data)
+                console.log('contacts', data);
                 setData((prev) => ({
                   ...prev,
                   contacts: {
@@ -81,13 +73,15 @@ export default function Contacts({
                 <input
                   className="w-full border-none outline-none"
                   {...register('contacts.email')}
-                  type='email'
+                  type="email"
                   placeholder="example@email.com"
                 />
               </div>
-              {
-                   errors.contacts?.email && <span className="text-red-500 text-xs">{errors.contacts.email.message}</span>
-                }
+              {errors.contacts?.email && (
+                <span className="text-red-500 text-xs">
+                  {errors.contacts.email.message}
+                </span>
+              )}
 
               {/* Twitter */}
               <div className="flex border border-[#666666] justify-start items-center rounded-sm">

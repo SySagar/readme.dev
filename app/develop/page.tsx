@@ -1,13 +1,12 @@
 'use client';
-import React, { useRef } from 'react';
-import { useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Text, Button, Label, Toaster } from '@groovy-box/ui';
+import { Text, Button, useToast } from '@groovy-box/ui';
 import Markdown from 'react-markdown';
 import useMarkdownParser from '@app/hooks/useMarkdownParser';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
-import { useToast } from '@groovy-box/ui';
+import UnsavedModal from '@app/components/UnsavedModal';
 import {
   Tabs,
   TabsContent,
@@ -18,11 +17,8 @@ import BasicInfo from './components/BasicInfo';
 import Skills from './components/Skills';
 import AdditionalData from './components/AdditionalData';
 import Contacts from './components/Contacts';
-// import { formSchema, FormData } from '@app/schema/contactsSchema';
-// import { zodResolver } from '@hookform/resolvers/zod';
 import { ChevronLeft } from 'lucide-react';
 import { useTheme } from 'next-themes';
-
 
 export type dataType = {
   firstName: string;
@@ -58,7 +54,11 @@ export type dataType = {
 };
 
 export default function Develop() {
-  const { register, handleSubmit, formState:{errors} } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [data, setData] = useState<dataType>({
     firstName: '',
     description: '',
@@ -92,16 +92,15 @@ export default function Develop() {
     },
   } as dataType);
   const mdEditor = useRef<HTMLDivElement>(null);
+  // const [isFormDirty, setIsFormDirty] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
   const { toast } = useToast();
 
   const { resolvedTheme } = useTheme();
-  console.log('resolvedTheme', resolvedTheme);
 
-  const markdownPreview = useMarkdownParser(data,resolvedTheme);
+  const markdownPreview = useMarkdownParser(data, resolvedTheme);
+
   const [viewType, setViewType] = useState<'markdown' | 'preview'>('preview');
-
-  console.log('data', data);
-  console.log('oapge errors', errors);
 
   const copyMD = async () => {
     await navigator.clipboard
@@ -122,8 +121,41 @@ export default function Develop() {
       });
   };
 
+  console.log('Develop -> data', data);
+
+  useEffect(() => {
+    const handleBeforeUnload = (event: any) => {
+      if (data) {
+        event.preventDefault();
+        // setShowModal(true);
+        return (event.returnValue = ''); // Required for older browsers
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [data]);
+
+  //   const handleModalConfirm = () => {
+  //     setShowModal(false);
+  //     setIsFormDirty(false); // Allow navigation// Execute the pending action (e.g., navigation)
+
+  // };
+
+  // const handleModalCancel = () => {
+  //   setShowModal(false); // Close modal and stay on the page
+  // };
+
   return (
     <div className="flex relative flex-col items-center justify-start gap-16 h-screen">
+      {/* <UnsavedModal
+      isOpen={showModal}
+      onConfirm={handleModalConfirm}
+      onCancel={handleModalCancel}
+    /> */}
       <p className="hidden sm:block text-4xl font-bold text-center text-black dark:text-white z-20 py-8">
         Create Your Story
       </p>
@@ -185,7 +217,7 @@ export default function Develop() {
             </Tabs>
           </div>
         </div>
-        <div className="flex flex-col flex-1 justify-start items-start border-[#575757] border-2 rounded-lg h-[700px] ">
+        <div className="flex flex-col flex-1 justify-start items-start  border-[#575757] border-2 rounded-lg h-[700px] ">
           <div className="preview relative flex flex-1 p-6 rounded-t-lg    overflow-scroll no-scrollbar w-full border-[#575757] border-b-2 h-[650px]">
             {viewType === 'preview' ? (
               <div>
@@ -219,6 +251,8 @@ export default function Develop() {
           </div>
           <div className="flex gap-4 p-3">
             <Button
+              className="text-white"
+              color="white"
               onClick={() => setViewType('preview')}
               variant={viewType === 'preview' ? 'outline' : 'default'}
             >
@@ -226,6 +260,7 @@ export default function Develop() {
             </Button>
             <Button
               onClick={() => setViewType('markdown')}
+              className="text-white"
               variant={viewType === 'markdown' ? 'outline' : 'default'}
             >
               Markdown
@@ -234,9 +269,9 @@ export default function Develop() {
         </div>
       </div>
 
-      <div className=' md:hidden flex relative flex-col items-center px-4  gap-16 h-screen justify-center'>
-        <Text variant='subtitle-2'>
-        We recommend using the product in larger screens for better experience
+      <div className=" md:hidden flex relative flex-col items-center px-4  gap-16 h-screen justify-center">
+        <Text variant="subtitle-2">
+          We recommend using the product in larger screens for better experience
         </Text>
       </div>
     </div>

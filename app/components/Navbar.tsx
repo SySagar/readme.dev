@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { useRouter } from 'next/navigation';
 import { Button } from '@groovy-box/ui';
 import Link from 'next/link';
 import ThemeSwitcher from '@app/theme/ThemeSwitcher';
@@ -9,7 +8,6 @@ import ThemeSwitcher from '@app/theme/ThemeSwitcher';
 const SCROLL_THRESHOLD = 200;
 
 export default function Navbar() {
-  const [activeLink, setActiveLink] = React.useState('home');
   const [scrollProgress, setScrollProgress] = React.useState(0);
 
   React.useEffect(() => {
